@@ -1,5 +1,6 @@
 package com.mycompany.app;
 
+// TODO figure out how to format imports
 import main.java.com.mycompany.utils.Node;
 
 import static org.junit.Assert.assertTrue;
@@ -13,8 +14,11 @@ import java.util.List;
 public class LowestCommonAncestorTest
 {
 
-    public void givenEmptyTreeShouldReturnNull(Node root, List<Node> ancestors) {
-
+    @Test
+    public void givenEmptyTreeShouldReturnNull() {
+        //getLowestCommonAncestor(new Node(5), new LinkedList());
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(null, null);
+        assertEqual(result, null);
     }
 
 }
