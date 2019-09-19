@@ -16,7 +16,7 @@ public class NodeTest {
         Node original = new Node(5); 
         Node leftNode = new Node(4);
         original.setLeft(leftNode);
-        assertEquals(original.getLeft(), leftNode);
+        assertEquals(leftNode, original.getLeft());
     }
 
     @Test
@@ -24,6 +24,6 @@ public class NodeTest {
         Node original = new Node(5);
         Node rightNode = new Node(2);
         original.setRight(rightNode);
-        assertEquals(original.getRight(), rightNode);
+        assertEquals(rightNode, original.getRight());
     }
 }

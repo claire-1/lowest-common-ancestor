@@ -6,9 +6,9 @@ package main.java.com.mycompany.utils;
  */
 
 public class Node {
-    public int data;
-    public Node left;
-    public Node right;
+    private int data;
+    private Node left;
+    private Node right;
 
     public Node(int data) {
         this.data = data;
