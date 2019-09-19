@@ -6,9 +6,9 @@ package main.java.com.mycompany.utils;
  */
 
 public class Node {
-    int data;
-    Node left;
-    Node right;
+    public int data;
+    public Node left;
+    public Node right;
 
     public Node(int data) {
         this.data = data;
@@ -16,6 +16,21 @@ public class Node {
         right = null;
     }
 
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public void setRight(Node right) {
+        this.right = right;
+    }
+
+    public Node getLeft() {
+        return this.left;
+    }
+
+    public Node getRight() {
+        return this.right;
+    }
     // TODO need this?
     // public boolean equals(Node obj) {
     //     if (obj==this) return true;
