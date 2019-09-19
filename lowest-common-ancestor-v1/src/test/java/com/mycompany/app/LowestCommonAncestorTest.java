@@ -22,4 +22,12 @@ public class LowestCommonAncestorTest
         assertNull(result);
     }
 
+    @Test
+    public void givenEmptyAncestorsShouldReturnNull() {
+        Node root = new Node(5);
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, null);
+        assertNull(result);
+    }
+    
+
 }
