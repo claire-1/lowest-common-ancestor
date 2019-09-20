@@ -1,9 +1,10 @@
 package com.mycompany.app;
 
-import main.java.com.mycompany.utils.Node;
+import com.mycompany.utils.Node;
 /**
  * LowestCommonAncestor.java - for finding the common ancestor of two nodes
  * in a binary tree.
+ * Adapted from: https://medium.com/algorithm-problems/lowest-common-ancestor-of-a-binary-tree-8f69531087b1
  *
  */
 public class LowestCommonAncestor

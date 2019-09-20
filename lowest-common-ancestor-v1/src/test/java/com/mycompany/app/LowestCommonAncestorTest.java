@@ -1,7 +1,7 @@
 package com.mycompany.app;
 
 // TODO figure out how to format imports
-import main.java.com.mycompany.utils.Node;
+import com.mycompany.utils.Node;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -41,7 +41,6 @@ public class LowestCommonAncestorTest
         Node root = new Node(1);
         Node leftNode = new Node(2);
         Node rightNode = new Node(3);
-
         root.setLeft(leftNode);
         root.setRight(rightNode);
 
@@ -50,7 +49,28 @@ public class LowestCommonAncestorTest
         assertEquals(root, result);
     }
 
-    // TODO what should happen if root in common ancestor list?
+    @Test
+    public void givenTreeWithRootAsFirstNodeToFindAncestorOfShouldReturnRoot() {
+        // Make the tree
+        Node root = new Node(5);
+        Node leftNode = new Node(2);
+        root.setLeft(leftNode);
 
+        // Get the common ancestor
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, root, leftNode);
+        assertEquals(root, result);
+    }
+
+    @Test
+    public void givenTreeWithRootAsSecondNodeToFindAncestorOfShouldReturnRoot() {
+        // Make the tree
+        Node root = new Node(5);
+        Node leftNode = new Node(2);
+        root.setLeft(leftNode);
+
+        // Get the common ancestor
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, leftNode, root);
+        assertEquals(root, result);
+    }
 
 }

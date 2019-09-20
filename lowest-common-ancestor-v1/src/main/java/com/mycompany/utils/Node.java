@@ -1,4 +1,4 @@
-package main.java.com.mycompany.utils;
+package com.mycompany.utils;
 /*
  * Basic Node class in Java for nodes with integer values.
  * From here: https://algorithms.tutorialhorizon.com/lowest-common-ancestor-in-a-binary-search-tree/.

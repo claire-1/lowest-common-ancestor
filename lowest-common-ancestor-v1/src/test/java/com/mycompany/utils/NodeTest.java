@@ -1,7 +1,7 @@
-package test.java.com.mycompany.utils;
+package com.mycompany.utils;
 
 // TODO figure out how to format imports
-import main.java.com.mycompany.utils.Node;
+import com.mycompany.utils.Node;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
