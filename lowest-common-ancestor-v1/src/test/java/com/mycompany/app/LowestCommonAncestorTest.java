@@ -73,4 +73,32 @@ public class LowestCommonAncestorTest
         assertEquals(root, result);
     }
 
+
+    @Test
+    public void givenLinearTreeAndNonRootNodesToFindNonRootAncestorOfShouldReturnCorrectNode() {
+        // Make the tree
+        Node root = new Node(500);
+        Node leftNode1 = new Node(200);
+        root.setLeft(leftNode1);
+        Node leftNode2 = new Node(40);
+        leftNode1.setLeft(leftNode2);
+        Node leftNode3 = new Node(10);
+        leftNode2.setLeft(leftNode3);
+        Node leftNode4 = new Node(5);
+        leftNode3.setLeft(leftNode4);
+        Node leftNode5 = new Node(0);
+        leftNode4.setLeft(leftNode5);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, 
+            leftNode5, leftNode2);
+       // System.out.println("result: " + (result.getData()));
+       // TODO what is the correct output when the node is in a line? 
+       // TODO the class slides suggest that it can't be the a node looking for decendants itself,
+       // TODO but the online description says that it can be
+       // TODO "The lowest common ancestor between two nodes n1 and n2 is defined as the lowest node in T that has both n1 and n2 as descendants (where we allow a node to be a descendant of itself)"
+       // TODO from https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
+        // assertEquals(leftNode1, result);
+        assertEquals(leftNode2, result); // based on online def
+    }
+
 }

@@ -31,6 +31,10 @@ public class Node {
     public Node getRight() {
         return this.right;
     }
+
+    public int getData() {
+        return this.data; // TODO delete this; just for debugging
+    }
     // TODO need this?
     // public boolean equals(Node obj) {
     //     if (obj==this) return true;
