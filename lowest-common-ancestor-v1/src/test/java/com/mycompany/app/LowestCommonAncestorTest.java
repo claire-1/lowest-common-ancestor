@@ -101,7 +101,7 @@ public class LowestCommonAncestorTest
     }
 
     @Test
-    public void givenBinaryTreeWithTwoSubtreesAndNodesInRightSubtreeShouldReturnSubtreeRootAsAncestor() {
+    public void givenBinaryTreeWithTwoSubtreesAndNodesInRightSubtreeShouldReturnRightSubtreeRootAsAncestor() {
         // Make the tree - root
         Node root = new Node(15);
         Node leftSubtreeRoot = new Node(10);
@@ -126,7 +126,7 @@ public class LowestCommonAncestorTest
     }
 
     @Test
-    public void givenBinaryTreeWithTwoSubtreesAndNodesInLeftSubtreeShouldReturnSubtreeRootAsAncestor() {
+    public void givenBinaryTreeWithTwoSubtreesAndNodesInLeftSubtreeShouldReturnLeftSubtreeRootAsAncestor() {
         // Make the tree - root
         Node root = new Node(15);
         Node leftSubtreeRoot = new Node(10);
@@ -148,6 +148,31 @@ public class LowestCommonAncestorTest
 
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, leftSubtreeLeftChild, leftSubtreeRightChild);
         assertEquals(leftSubtreeRoot, result);
+    }
+
+    @Test
+    public void givenBinaryTreeWithTwoSubtreesAndNodesInDifferentSubtreeShouldReturnRootAsAncestor() {
+        // Make the tree - root
+        Node root = new Node(15);
+        Node leftSubtreeRoot = new Node(10);
+        root.setLeft(leftSubtreeRoot);
+        Node rightSubtreeRoot = new Node (25);
+        root.setRight(rightSubtreeRoot);
+       
+        //Make the tree - left subtree
+        Node leftSubtreeLeftChild = new Node(8);
+        leftSubtreeRoot.setLeft(leftSubtreeLeftChild);
+        Node leftSubtreeRightChild = new Node(12);
+        leftSubtreeRoot.setRight(leftSubtreeRightChild);
+
+        // Make the tree - right subtree
+        Node rightSubtreeLeftChild = new Node(20);
+        rightSubtreeRoot.setLeft(rightSubtreeLeftChild);
+        Node rightSubtreeRightChild = new Node(30);
+        rightSubtreeRoot.setRight(rightSubtreeRightChild);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, rightSubtreeLeftChild, leftSubtreeLeftChild);
+        assertEquals(root, result);
     }
     // TODO more tests with more complicated trees with two nodes on two different subtrees
 }
