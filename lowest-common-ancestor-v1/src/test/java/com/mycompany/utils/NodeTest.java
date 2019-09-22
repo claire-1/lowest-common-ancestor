@@ -1,13 +1,8 @@
 package com.mycompany.utils;
 
-// TODO figure out how to format imports
-import com.mycompany.utils.Node;
-
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import java.util.List;
 
 public class NodeTest {
 
