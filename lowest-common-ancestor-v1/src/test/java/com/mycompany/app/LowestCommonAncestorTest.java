@@ -3,7 +3,6 @@ package com.mycompany.app;
 // TODO figure out how to format imports
 import com.mycompany.utils.Node;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -101,4 +100,30 @@ public class LowestCommonAncestorTest
         assertEquals(leftNode2, result); // based on online def
     }
 
+    @Test
+    public void givenBinaryTreeWithTwoSubtreesAndNodesInRightSubtreeShouldReturnSubtreeRootAsAncestor() {
+        // Make the tree - root
+        Node root = new Node(15);
+        Node leftSubtreeRoot = new Node(10);
+        root.setLeft(leftSubtreeRoot);
+        Node rightSubtreeRoot = new Node (25);
+        root.setRight(rightSubtreeRoot);
+       
+        //Make the tree - left subtree
+        Node leftSubtreeLeftChild = new Node(8);
+        leftSubtreeRoot.setLeft(leftSubtreeLeftChild);
+        Node leftSubtreeRightChild = new Node(12);
+        leftSubtreeRoot.setRight(leftSubtreeRightChild);
+
+        // Make the tree - right subtree
+        Node rightSubtreeLeftChild = new Node(20);
+        rightSubtreeRoot.setLeft(rightSubtreeLeftChild);
+        Node rightSubtreeRightChild = new Node(30);
+        rightSubtreeRoot.setRight(rightSubtreeRightChild);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, rightSubtreeLeftChild, rightSubtreeRightChild);
+        assertEquals(rightSubtreeRoot, result);
+    }
+
+    // TODO more tests with more complicated trees with two nodes on two different subtrees
 }
