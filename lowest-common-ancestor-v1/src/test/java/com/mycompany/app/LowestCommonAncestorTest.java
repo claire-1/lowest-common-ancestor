@@ -8,7 +8,8 @@ import com.mycompany.utils.Node;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for LowestCommonAncestor.
+ * TODO create a script to run the tests
  */
 public class LowestCommonAncestorTest {
 
