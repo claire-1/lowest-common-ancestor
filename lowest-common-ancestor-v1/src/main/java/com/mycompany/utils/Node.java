@@ -35,26 +35,4 @@ public class Node {
     public int getData() {
         return this.data; // TODO delete this; just for debugging
     }
-    // TODO need this?
-    // public boolean equals(Node obj) {
-    //     if (obj==this) return true;
-    //     if (obj==null || obj.getClass()!=this.getClass()) return false;
-    //     if (obj.data != this.data || !((obj.left).equals(obj.right)) || !((obj.right).equals(this.right))) return false;
-    //     return true;
-    // }
-    // TODO override hashCode() method
-    // public int hashCode() {
-    //     int result = 17;
-
-    //     result = 31 * result + this.data;
-    //     if (this.right != null) {
-    //         result += right.hashCode();
-    //     }
-
-    //     if (this.left != null) {
-    //         result += left.hashCode();
-    //     }
-
-    //     return result;
-    // } 
 }

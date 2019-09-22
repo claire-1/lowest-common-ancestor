@@ -1,15 +1,16 @@
 package com.mycompany.app;
 
 import com.mycompany.utils.Node;
+
 /**
- * LowestCommonAncestor.java - for finding the common ancestor of two nodes
- * in a binary tree.
- * Adapted from: https://medium.com/algorithm-problems/lowest-common-ancestor-of-a-binary-tree-8f69531087b1
+ * LowestCommonAncestor.java - for finding the common ancestor of two nodes in a
+ * binary tree. Adapted from:
+ * https://medium.com/algorithm-problems/lowest-common-ancestor-of-a-binary-tree-8f69531087b1
  *
  */
-public class LowestCommonAncestor
-{
-  // TODO are we supposed to handle finding ancestors for two nodes only or also for
+public class LowestCommonAncestor {
+  // TODO are we supposed to handle finding ancestors for two nodes only or also
+  // for
   // handling more than two nodes? --> need access to directions
   public static Node getLowestCommonAncestor(Node root, Node node1, Node node2) {
     if ((root == null) || (node1 == null) || (node2 == null)) {
