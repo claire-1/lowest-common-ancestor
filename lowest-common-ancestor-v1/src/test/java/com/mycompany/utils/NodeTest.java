@@ -8,7 +8,7 @@ public class NodeTest {
 
     @Test
     public void givenNewLeftNodeShouldSetLeftNode() {
-        Node original = new Node(5); 
+        Node original = new Node(5);
         Node leftNode = new Node(4);
         original.setLeft(leftNode);
         assertEquals(leftNode, original.getLeft());
