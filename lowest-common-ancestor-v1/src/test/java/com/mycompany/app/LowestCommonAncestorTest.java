@@ -30,7 +30,7 @@ public class LowestCommonAncestorTest
     @Test
     public void givenEmptySecondNodeToFindAncestorOfShouldReturnNull() {
         Node root = new Node(5);
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, null, root);
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, root, null);
         assertNull(result);
     }
     
@@ -174,5 +174,7 @@ public class LowestCommonAncestorTest
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, rightSubtreeLeftChild, leftSubtreeLeftChild);
         assertEquals(root, result);
     }
-    // TODO more tests with more complicated trees with two nodes on two different subtrees
+
+    // TODO test --> what happens if given a node that isn't in the tree/isn't attached to the root
+    // TODO and can't be found?
 }
