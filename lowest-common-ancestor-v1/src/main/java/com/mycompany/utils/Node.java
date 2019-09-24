@@ -1,8 +1,7 @@
 package com.mycompany.utils;
 /*
  * Basic Node class in Java for nodes with integer values.
- * From here: https://algorithms.tutorialhorizon.com/lowest-common-ancestor-in-a-binary-search-tree/.
- * TODO: need this? equals adapted from: https://stackoverflow.com/questions/26864477/assert-assertequals-fails-for-custom-class-objects.
+ * From here: https://stackoverflow.com/questions/3522454/java-tree-data-structure
  */
 
 import java.util.LinkedList;

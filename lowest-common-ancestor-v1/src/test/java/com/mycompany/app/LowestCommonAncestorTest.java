@@ -39,22 +39,30 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
+    public void givenTreeWithRootAndTwoChildrenAsDescendantsShouldReturnRootAsAncestorOfChildren() {
         // Make the tree
         Node root = new Node(5);
         Node child1 = new Node(4);
         Node child2 = new Node(8);
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child1);
+        descendants.add(child2); 
 
         root.addChild(child1);
         root.addChild(child2);
 
         // Get the common ancestor
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, root.getChildren());
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
         assertEquals(root, result);
     }
 
+   // public void givenTreeWithRootAndThreeChildrenAsDescendantsShouldReturnRootAsAncestorOfChildren()
+   // ^^^^ does this test anything that above doesn't test? TODO 
+   
+   // TODO linear example on slides doesn't match wikipedia --> can a node
+    // TODO be an ancestor of itself for this class?
     // @Test
-    // public void givenTreeWithRootAsFirstNodeToFindAncestorOfShouldReturnRoot() {
+    // public void givenTreeWithRootInDecendantsShouldReturnRoot() {
     //     // Make the tree
     //     Node root = new Node(5);
     //     Node leftNode = new Node(2);
@@ -77,6 +85,7 @@ public class LowestCommonAncestorTest {
     //     assertEquals(root, result);
     // }
 
+    // TODO linear wikipedia doesn't match slides --> which to follow?
     // @Test
     // public void givenLinearTreeAndNonRootNodesToFindNonRootAncestorOfShouldReturnCorrectNode() {
     //     // Make the tree
@@ -107,30 +116,35 @@ public class LowestCommonAncestorTest {
     //     assertEquals(leftNode2, result); // based on online def
     // }
 
-    // @Test
-    // public void givenBinaryTreeWithTwoSubtreesAndNodesInRightSubtreeShouldReturnRightSubtreeRootAsAncestor() {
-    //     // Make the tree - root
-    //     Node root = new Node(15);
-    //     Node leftSubtreeRoot = new Node(10);
-    //     root.setLeft(leftSubtreeRoot);
-    //     Node rightSubtreeRoot = new Node(25);
-    //     root.setRight(rightSubtreeRoot);
+     @Test
+     public void givenTreeWithTwoSubtreesAndNodesInOneSubtreeShouldReturnThatSubtreeRootAsAncestor() {
+        Node root = new Node(15);
+        Node firstSubtreeRoot = new Node(10);
+        Node secondSubtreeRoot = new Node(25);
+        root.addChild(firstSubtreeRoot);
+        root.addChild(secondSubtreeRoot);
 
-    //     // Make the tree - left subtree
-    //     Node leftSubtreeLeftChild = new Node(8);
-    //     leftSubtreeRoot.setLeft(leftSubtreeLeftChild);
-    //     Node leftSubtreeRightChild = new Node(12);
-    //     leftSubtreeRoot.setRight(leftSubtreeRightChild);
+        Node firstSubtreeFirstChild = new Node(12);
+        Node firstSubtreeSecondChild = new Node(13);
+        Node firstSubtreeThirdChild = new Node(14);
+        firstSubtreeRoot.addChild(firstSubtreeFirstChild);
+        firstSubtreeRoot.addChild(firstSubtreeSecondChild);
+        firstSubtreeRoot.addChild(firstSubtreeThirdChild);
 
-    //     // Make the tree - right subtree
-    //     Node rightSubtreeLeftChild = new Node(20);
-    //     rightSubtreeRoot.setLeft(rightSubtreeLeftChild);
-    //     Node rightSubtreeRightChild = new Node(30);
-    //     rightSubtreeRoot.setRight(rightSubtreeRightChild);
+        Node secondSubtreeFirstChild = new Node(12);
+        Node secondSubtreeSecondChild = new Node(13);
+        Node secondSubtreeThirdChild = new Node(14);
+        secondSubtreeRoot.addChild(secondSubtreeFirstChild);
+        secondSubtreeRoot.addChild(secondSubtreeSecondChild);
+        secondSubtreeRoot.addChild(secondSubtreeThirdChild);
 
-    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, rightSubtreeLeftChild, rightSubtreeRightChild);
-    //     assertEquals(rightSubtreeRoot, result);
-    // }
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(firstSubtreeFirstChild);
+        descendants.add(firstSubtreeThirdChild);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(firstSubtreeRoot, result);
+     }
 
     // @Test
     // public void givenBinaryTreeWithTwoSubtreesAndNodesInLeftSubtreeShouldReturnLeftSubtreeRootAsAncestor() {

@@ -11,9 +11,7 @@ import com.mycompany.utils.Node;
  *
  */
 public class LowestCommonAncestor {
-  // TODO are we supposed to handle finding ancestors for two nodes only or also
-  // for
-  // handling more than two nodes? --> need access to directions
+  // TODO reimplement more like this https://www.careercup.com/question?id=13437666
   public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
     if (root == null || descendants.size() == 0) {
       return null;
