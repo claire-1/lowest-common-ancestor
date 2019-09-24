@@ -1,5 +1,6 @@
 package com.mycompany.app;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.util.LinkedList;
@@ -37,19 +38,20 @@ public class LowestCommonAncestorTest {
         assertNull(result);
     }
 
-    // @Test
-    // public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
-    //     // Make the tree
-    //     Node root = new Node(1);
-    //     Node leftNode = new Node(2);
-    //     Node rightNode = new Node(3);
-    //     root.setLeft(leftNode);
-    //     root.setRight(rightNode);
+    @Test
+    public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
+        // Make the tree
+        Node root = new Node(5);
+        Node child1 = new Node(4);
+        Node child2 = new Node(8);
 
-    //     // Get the common ancestor
-    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, leftNode, rightNode);
-    //     assertEquals(root, result);
-    // }
+        root.addChild(child1);
+        root.addChild(child2);
+
+        // Get the common ancestor
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, root.getChildren());
+        assertEquals(root, result);
+    }
 
     // @Test
     // public void givenTreeWithRootAsFirstNodeToFindAncestorOfShouldReturnRoot() {
