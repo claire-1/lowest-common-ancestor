@@ -43,4 +43,21 @@ public class NodeTest {
         assertEquals(0, parent.getChildren().get(2).getChildren().size());
     }
 
+    @Test
+    public void givenOneChildWithAChildOfItsOwnShouldAttachChildToParentButNotChildsChild() {
+        Node parent = new Node(5);
+        Node childOfParent = new Node(4);
+        Node childOfChildOfParent = new Node(3);
+
+        parent.addChild(childOfParent);
+        childOfParent.addChild(childOfChildOfParent);
+
+        assertEquals(1, parent.getChildren().size());
+        assertEquals(childOfParent, parent.getChildren().get(0));
+
+        assertEquals(1, childOfParent.getChildren().size());
+        assertEquals(childOfChildOfParent, childOfParent.getChildren().get(0));
+
+        assertEquals(0, childOfChildOfParent.getChildren().size());
+    }
 }
