@@ -5,34 +5,27 @@ package com.mycompany.utils;
  * TODO: need this? equals adapted from: https://stackoverflow.com/questions/26864477/assert-assertequals-fails-for-custom-class-objects.
  */
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Node {
     private int data;
-    private Node left;
-    private Node right;
+    private List<Node> children;
 
     public Node(int data) {
         this.data = data;
-        left = null;
-        right = null;
+        this.children = new LinkedList<>();
     }
 
-    public void setLeft(Node left) {
-        this.left = left;
+    public void addChild(Node newChild) {
+        this.children.add(newChild);
     }
 
-    public void setRight(Node right) {
-        this.right = right;
-    }
-
-    public Node getLeft() {
-        return this.left;
-    }
-
-    public Node getRight() {
-        return this.right;
+    public List<Node> getChildren() {
+        return children;
     }
 
     public int getData() {
-        return this.data; // TODO delete this; just for debugging
+        return data;
     }
 }
