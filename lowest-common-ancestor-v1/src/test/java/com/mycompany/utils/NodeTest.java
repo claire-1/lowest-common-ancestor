@@ -7,18 +7,14 @@ import org.junit.Test;
 public class NodeTest {
 
     @Test
-    public void givenNewLeftNodeShouldSetLeftNode() {
-        Node original = new Node(5);
-        Node leftNode = new Node(4);
-        original.setLeft(leftNode);
-        assertEquals(leftNode, original.getLeft());
+    public void givenNewChildNodeShouldAttachChildNodeToParentNode() {
+        Node parent = new Node(5);
+        Node child = new Node(4);
+        parent.addChild(child);
+        assertEquals(1, parent.getChildren().size());
+        assertEquals(child, parent.getChildren().get(0));
     }
 
-    @Test
-    public void givenNewRightNodeShouldSetRightNode() {
-        Node original = new Node(5);
-        Node rightNode = new Node(2);
-        original.setRight(rightNode);
-        assertEquals(rightNode, original.getRight());
-    }
+    // TODO add test for more than one node
+    // TODO add test for zero nodes
 }
