@@ -15,6 +15,11 @@ public class LowestCommonAncestor {
   // for
   // handling more than two nodes? --> need access to directions
   public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
+    if (root == null || descendants.size() == 0) {
+      return null;
+    }
+
+    return root;
     // if ((root == null) || (node1 == null) || (node2 == null)) {
     //   return null;
     // }
@@ -36,6 +41,6 @@ public class LowestCommonAncestor {
     // }
 
     // return ancestor;
-    return null;
+   
   }
 }
