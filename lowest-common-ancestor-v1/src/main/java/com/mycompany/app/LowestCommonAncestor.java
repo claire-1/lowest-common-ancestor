@@ -7,38 +7,40 @@ import com.mycompany.utils.Node;
 /**
  * LowestCommonAncestor.java - for finding the common ancestor of two nodes in a
  * binary tree. Adapted from:
- * https://medium.com/algorithm-problems/lowest-common-ancestor-of-a-binary-tree-8f69531087b1
+ * https://www.careercup.com/question?id=13437666
  *
  */
 public class LowestCommonAncestor {
-  // TODO reimplement more like this https://www.careercup.com/question?id=13437666
   public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
+    // TODO what happens if a node isn't in the tree?
+
     if (root == null || descendants.size() == 0) {
       return null;
     }
 
-    return root;
-    // if ((root == null) || (node1 == null) || (node2 == null)) {
-    //   return null;
-    // }
+    // Descendants contain the root so return the root 
+    // (TODO this doesn't match with slides but does match wikipedia --> what to do?)
+    if (descendants.contains(root)) {
+      return root;
+    }
 
-    // if ((node1 == root) || (node2 == root)) {
-    //   return root;
-    // }
-    // Node left = getLowestCommonAncestor(root.getLeft(), node1, node2);
-    // Node right = getLowestCommonAncestor(root.getRight(), node1, node2);
-    // if (left != null && right != null) {
-    //   return root;
-    // }
+    Node currentLCA = null;
+    int count = 0;
 
-    // Node ancestor;
-    // if (left == null) {
-    //   ancestor = right;
-    // } else {
-    //   ancestor = left;
-    // }
+    // Find the LCA from all the children
+    for (Node node : root.getChildren()) {
+      Node result = getLowestCommonAncestor(node, descendants);
+      if (result != null) {
+        count++;
+        currentLCA = result;
+      }
+    }
 
-    // return ancestor;
+    if (count == descendants.size()) {
+      return root; // TODO check this with what the linear case should be
+    }
+
+    return currentLCA;
    
   }
 }

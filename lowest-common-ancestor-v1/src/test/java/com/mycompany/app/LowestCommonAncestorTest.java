@@ -44,15 +44,16 @@ public class LowestCommonAncestorTest {
         Node root = new Node(5);
         Node child1 = new Node(4);
         Node child2 = new Node(8);
+        root.addChild(child1);
+        root.addChild(child2);
+
         List<Node> descendants = new LinkedList<>();
         descendants.add(child1);
         descendants.add(child2); 
 
-        root.addChild(child1);
-        root.addChild(child2);
-
         // Get the common ancestor
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        System.out.println("DATA " + result.getData()); // TODO delete this
         assertEquals(root, result);
     }
 
