@@ -36,8 +36,9 @@ public class LowestCommonAncestor {
       }
     }
 
+    System.out.println("DESCENDANTS " + descendants.size()); // TODO delete
     if (count == descendants.size()) {
-      return root; // TODO check this with what the linear case should be
+      return root;
     }
 
     return currentLCA;

@@ -84,20 +84,6 @@ public class LowestCommonAncestorTest {
    
    // TODO linear example on slides doesn't match wikipedia --> can a node
     // TODO be an ancestor of itself for this class?
-    @Test
-    public void givenTreeWithRootInDecendantsShouldReturnRoot() {
-        // Make the tree
-        Node root = new Node(5);
-        Node child = new Node(2);
-        root.addChild(child);
-
-        List<Node> descendants = new LinkedList<>();
-        descendants.add(child);
-
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-        assertEquals(root, result);
-    }
-
     // TODO this depends on what should happen in linear case
     @Test
     public void givenTreeWithRootInDescendantsShouldReturnRoot() { // TODO need this test? lines of code in LCA.java already covered so I don't know
@@ -116,10 +102,10 @@ public class LowestCommonAncestorTest {
         firstSubtreeRoot.addChild(firstSubtreeThirdChild);
         
         List<Node> descendants = new LinkedList<>();
-        descendants.add(root);
-        descendants.add(secondSubtreeRoot);
+        descendants.add(root); // Add root to descendants
+        descendants.add(firstSubtreeFirstChild);
+        descendants.add(firstSubtreeSecondChild);
         descendants.add(firstSubtreeThirdChild);
-        descendants.add(firstSubtreeRoot);
 
         // Get the common ancestor
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
@@ -192,31 +178,6 @@ public class LowestCommonAncestorTest {
      }
 
     // @Test
-    // public void givenBinaryTreeWithTwoSubtreesAndNodesInLeftSubtreeShouldReturnLeftSubtreeRootAsAncestor() {
-    //     // Make the tree - root
-    //     Node root = new Node(15);
-    //     Node leftSubtreeRoot = new Node(10);
-    //     root.addChild(leftSubtreeRoot);
-    //     Node rightSubtreeRoot = new Node(25);
-    //     root.setRight(rightSubtreeRoot);
-
-    //     // Make the tree - left subtree
-    //     Node leftSubtreeLeftChild = new Node(8);
-    //     leftSubtreeRoot.addChild(leftSubtreeLeftChild);
-    //     Node leftSubtreeRightChild = new Node(12);
-    //     leftSubtreeRoot.setRight(leftSubtreeRightChild);
-
-    //     // Make the tree - right subtree
-    //     Node rightSubtreeLeftChild = new Node(20);
-    //     rightSubtreeRoot.addChild(rightSubtreeLeftChild);
-    //     Node rightSubtreeRightChild = new Node(30);
-    //     rightSubtreeRoot.setRight(rightSubtreeRightChild);
-
-    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, leftSubtreeLeftChild, leftSubtreeRightChild);
-    //     assertEquals(leftSubtreeRoot, result);
-    // }
-
-    // @Test
     // public void givenTreeWithTwoSubtreesAndNodesInDifferentSubtreeShouldReturnRootAsAncestor() {
     //     // Make the tree - root
     //     Node root = new Node(15);
@@ -244,4 +205,5 @@ public class LowestCommonAncestorTest {
     // TODO test --> what happens if given a node that isn't in the tree/isn't
     // attached to the root
     // TODO and can't be found?
+
 }
