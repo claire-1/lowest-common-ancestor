@@ -12,6 +12,7 @@ public class NodeTest {
         Node parent = new Node(5);
         assertEquals(0, parent.getChildren().size());
     }
+
     @Test
     public void givenOneNewChildNodeShouldAttachChildNodeToParentNodeAndChildShouldNotHaveChildren() {
         Node parent = new Node(5);

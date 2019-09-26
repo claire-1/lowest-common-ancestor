@@ -7,8 +7,8 @@ import com.mycompany.utils.Node;
 
 /**
  * LowestCommonAncestor.java - for finding the common ancestor of two nodes in a
- * binary tree. Adapted from: https://www.careercup.com/question?id=13437666
- * and https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/.
+ * binary tree. Adapted from: https://www.careercup.com/question?id=13437666 and
+ * https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/.
  *
  */
 public class LowestCommonAncestor {
@@ -35,7 +35,7 @@ public class LowestCommonAncestor {
 
     if (root == null || descendants.size() == 0) {
       return null;
-    } 
+    }
 
     for (Node descendant : descendants) {
       if (!pathExists(root, descendant)) {
@@ -44,16 +44,17 @@ public class LowestCommonAncestor {
     }
 
     return getLowestCommonAncestorHelper(root, descendants);
-    
-   }
+
+  }
 
   public static Node getLowestCommonAncestorHelper(Node root, List<Node> descendants) {
     if (root == null || descendants.size() == 0) {
       return null;
     }
 
-    // Descendants contain the root so return the root 
-    // (TODO this doesn't match with slides but does match wikipedia --> what to do?)
+    // Descendants contain the root so return the root
+    // (TODO this doesn't match with slides but does match wikipedia --> what to
+    // do?)
     if (descendants.contains(root)) {
       return root;
     }
