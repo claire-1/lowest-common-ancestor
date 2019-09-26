@@ -12,11 +12,13 @@ import com.mycompany.utils.Node;
  */
 public class LowestCommonAncestor {
   public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
+
+    
     // TODO what happens if a node isn't in the tree?
 
     if (root == null || descendants.size() == 0) {
       return null;
-    }
+    } 
 
     // Descendants contain the root so return the root 
     // (TODO this doesn't match with slides but does match wikipedia --> what to do?)
@@ -36,7 +38,6 @@ public class LowestCommonAncestor {
       }
     }
 
-    System.out.println("DESCENDANTS " + descendants.size()); // TODO delete
     if (count == descendants.size()) {
       return root;
     }

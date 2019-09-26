@@ -1,14 +1,16 @@
 package com.mycompany.app;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.mycompany.utils.Node;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for LowestCommonAncestor.
@@ -206,4 +208,16 @@ public class LowestCommonAncestorTest {
     // attached to the root
     // TODO and can't be found?
 
+    @Test
+    public void givenDesendantNotInTreeShouldThrowAnException() {
+        Node root = new Node(5);
+        Node notInTree = new Node(700);
+        
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(notInTree);
+
+        InvalidParameterException e = 
+            assertThrows(InvalidParameterException.class, LowestCommonAncestor.getLowestCommonAncestor(root, descendants));
+
+    }
 }
