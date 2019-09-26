@@ -204,10 +204,6 @@ public class LowestCommonAncestorTest {
     //     assertEquals(root, result);
     // }
 
-    // TODO test --> what happens if given a node that isn't in the tree/isn't
-    // attached to the root
-    // TODO and can't be found?
-
     @Test
     public void givenDesendantNotInTreeShouldThrowAnException() {
         Node root = new Node(5);
@@ -216,8 +212,7 @@ public class LowestCommonAncestorTest {
         List<Node> descendants = new LinkedList<>();
         descendants.add(notInTree);
 
-        InvalidParameterException e = 
-            assertThrows(InvalidParameterException.class, LowestCommonAncestor.getLowestCommonAncestor(root, descendants));
+        assertThrows(InvalidParameterException.class, () -> {LowestCommonAncestor.getLowestCommonAncestor(root, descendants);});
 
     }
 }
