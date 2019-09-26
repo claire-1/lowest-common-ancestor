@@ -127,24 +127,7 @@ public class LowestCommonAncestorTest {
     }
 
     // TODO linear wikipedia doesn't match slides --> which to follow?
-    // @Test
-    // public void givenLinearTreeAndNonRootNodesToFindNonRootAncestorOfShouldReturnCorrectNode() {
-    //     // Make the tree
-    //     Node root = new Node(500);
-    //     Node leftNode1 = new Node(200);
-    //     root.setLeft(leftNode1);
-    //     Node leftNode2 = new Node(40);
-    //     leftNode1.setLeft(leftNode2);
-    //     Node leftNode3 = new Node(10);
-    //     leftNode2.setLeft(leftNode3);
-    //     Node leftNode4 = new Node(5);
-    //     leftNode3.setLeft(leftNode4);
-    //     Node leftNode5 = new Node(0);
-    //     leftNode4.setLeft(leftNode5);
-
-    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, leftNode5, leftNode2);
-    //     // System.out.println("result: " + (result.getData()));
-    //     // TODO what is the correct output when the node is in a line?
+        //     // TODO what is the correct output when the node is in a line?
     //     // TODO the class slides suggest that it can't be the a node looking for
     //     // decendants itself,
     //     // TODO but the online description says that it can be
@@ -153,9 +136,30 @@ public class LowestCommonAncestorTest {
     //     // node to be a descendant of itself)"
     //     // TODO from
     //     // https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
-    //     // assertEquals(leftNode1, result);
-    //     assertEquals(leftNode2, result); // based on online def
-    // }
+    @Test
+    public void givenLinearTreeAndNonRootNodesDescendantsShouldReturnNodeClosestToRootInDescendants() {
+        // Make the tree
+        Node root = new Node(500);
+        Node child1 = new Node(200);
+        root.addChild(child1);
+        Node child2 = new Node(40);
+        child1.addChild(child2);
+        Node child3 = new Node(10);
+        child2.addChild(child3);
+        Node child4 = new Node(5);
+        child3.addChild(child4);
+        Node child5 = new Node(0);
+        child4.addChild(child5);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child5);
+        descendants.add(child4);
+        descendants.add(child3);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+
+        assertEquals(child3, result); // based on online def TODO
+    }
 
      @Test
      public void givenTreeWithTwoSubtreesAndNodesInOneSubtreeShouldReturnThatSubtreeRootAsAncestor() {
@@ -192,19 +196,19 @@ public class LowestCommonAncestorTest {
     //     // Make the tree - root
     //     Node root = new Node(15);
     //     Node leftSubtreeRoot = new Node(10);
-    //     root.setLeft(leftSubtreeRoot);
+    //     root.addChild(leftSubtreeRoot);
     //     Node rightSubtreeRoot = new Node(25);
     //     root.setRight(rightSubtreeRoot);
 
     //     // Make the tree - left subtree
     //     Node leftSubtreeLeftChild = new Node(8);
-    //     leftSubtreeRoot.setLeft(leftSubtreeLeftChild);
+    //     leftSubtreeRoot.addChild(leftSubtreeLeftChild);
     //     Node leftSubtreeRightChild = new Node(12);
     //     leftSubtreeRoot.setRight(leftSubtreeRightChild);
 
     //     // Make the tree - right subtree
     //     Node rightSubtreeLeftChild = new Node(20);
-    //     rightSubtreeRoot.setLeft(rightSubtreeLeftChild);
+    //     rightSubtreeRoot.addChild(rightSubtreeLeftChild);
     //     Node rightSubtreeRightChild = new Node(30);
     //     rightSubtreeRoot.setRight(rightSubtreeRightChild);
 
@@ -217,19 +221,19 @@ public class LowestCommonAncestorTest {
     //     // Make the tree - root
     //     Node root = new Node(15);
     //     Node leftSubtreeRoot = new Node(10);
-    //     root.setLeft(leftSubtreeRoot);
+    //     root.addChild(leftSubtreeRoot);
     //     Node rightSubtreeRoot = new Node(25);
     //     root.setRight(rightSubtreeRoot);
 
     //     // Make the tree - left subtree
     //     Node leftSubtreeLeftChild = new Node(8);
-    //     leftSubtreeRoot.setLeft(leftSubtreeLeftChild);
+    //     leftSubtreeRoot.addChild(leftSubtreeLeftChild);
     //     Node leftSubtreeRightChild = new Node(12);
     //     leftSubtreeRoot.setRight(leftSubtreeRightChild);
 
     //     // Make the tree - right subtree
     //     Node rightSubtreeLeftChild = new Node(20);
-    //     rightSubtreeRoot.setLeft(rightSubtreeLeftChild);
+    //     rightSubtreeRoot.addChild(rightSubtreeLeftChild);
     //     Node rightSubtreeRightChild = new Node(30);
     //     rightSubtreeRoot.setRight(rightSubtreeRightChild);
 
