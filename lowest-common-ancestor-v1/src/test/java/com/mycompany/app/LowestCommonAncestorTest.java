@@ -84,17 +84,19 @@ public class LowestCommonAncestorTest {
    
    // TODO linear example on slides doesn't match wikipedia --> can a node
     // TODO be an ancestor of itself for this class?
-    // @Test
-    // public void givenTreeWithRootInDecendantsShouldReturnRoot() {
-    //     // Make the tree
-    //     Node root = new Node(5);
-    //     Node leftNode = new Node(2);
-    //     root.setLeft(leftNode);
+    @Test
+    public void givenTreeWithRootInDecendantsShouldReturnRoot() {
+        // Make the tree
+        Node root = new Node(5);
+        Node child = new Node(2);
+        root.addChild(child);
 
-    //     // Get the common ancestor
-    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, root, leftNode);
-    //     assertEquals(root, result);
-    // }
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(root, result);
+    }
 
     // TODO this depends on what should happen in linear case
     @Test
