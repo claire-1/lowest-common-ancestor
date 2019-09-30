@@ -1,5 +1,6 @@
 package com.mycompany.app;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,7 +32,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenEmptyDescendantsListOfShouldReturnNull() {
+    public void givenEmptyDescendantsListShouldReturnNull() {
         Node root = new Node(5);
         List<Node> descendants = new LinkedList<>();
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
@@ -39,7 +40,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenOneNodeInTreeShouldReturnThatNode() {
+    public void givenOneNodeInTreeAndDescendantsShouldReturnThatNode() {
         Node root = new Node(5);
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
@@ -242,7 +243,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenDesendantNotInTreeShouldThrowAnException() {
+    public void givenDesendantNotInTreeShouldThrowInvalidParameterException() {
         Node root = new Node(5);
         Node notInTree = new Node(700);
 
@@ -256,7 +257,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenTreeWithDuplicateDesendantShouldThrowInvalidParameter() {
+    public void givenTreeWithDuplicateDesendantShouldThrowInvalidParameterException() {
         Node root = new Node(5);
         Node firstSubtree = new Node(1);
         root.addChild(firstSubtree);
@@ -283,7 +284,41 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenDirectedAcyclicGraphShouldReturnLowestCommonAncestor() {
+    // TODO: this functionality will be implemented in part 2 and should
+    // return the correct node then. 
+    public void givenDirectedAcyclicGraphInPartOneShouldNotThrowAnException() {
+        Node root = new Node(15);
+        Node childOfRoot1 = new Node(12);
+        root.addChild(childOfRoot1);
+        Node childOfRoot2 = new Node(13);
+        root.addChild(childOfRoot2);
+
+        Node connectedChild1 = new Node(20);
+        childOfRoot1.addChild(connectedChild1);
+        Node connectedChild2 = new Node(21);
+        childOfRoot2.addChild(connectedChild2);
+        connectedChild1.addChild(connectedChild2);
+
+        Node childOfRoot2Child = new Node(3);
+        childOfRoot2.addChild(childOfRoot2Child);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(childOfRoot2Child);
+        descendants.add(connectedChild1);
+
+        // TODO: the functionality for this test isn't implemented in part 1 so this
+        // will give the incorrect node for part 1 but shouldn't throw an exception.
+        // Change this to assertEquals(childOfRoot2, result); once part 2 is
+        // implemented.
+        assertDoesNotThrow(() -> {
+            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        });
+    }
+
+    @Test
+    // TODO: this functionality will be implemented in part 2 and StackOverflow
+    // will no longer be expected.
+    public void givenGraphWithCycleInPartOneShouldThrowStackOverflowException() {
         Node root = new Node(15);
         Node childOfRoot1 = new Node(12);
         root.addChild(childOfRoot1);
@@ -305,10 +340,11 @@ public class LowestCommonAncestorTest {
         descendants.add(connectedChild1);
 
         // TODO: the functionality for this test isn't implemented in part 1 so this
-        // will cause a StackOverflow. Change this to assertEquals(childOfRoot2,
-        // result); once part 2 is implemented.
+        // will cause a StackOverflow. Change this to be InvalidParameterException
+        // once part 2 is implemented.
         assertThrows(StackOverflowError.class, () -> {
             LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
         });
     }
+
 }
