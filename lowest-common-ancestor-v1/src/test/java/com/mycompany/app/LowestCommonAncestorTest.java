@@ -282,8 +282,33 @@ public class LowestCommonAncestorTest {
 
     }
 
-    // @Test 
-    // public void givenDirectedAcyclicGraphShouldReturnLowestCommonAncestor() {
-        
-    // } 
+    @Test
+    public void givenDirectedAcyclicGraphShouldReturnLowestCommonAncestor() {
+        Node root = new Node(15);
+        Node childOfRoot1 = new Node(12);
+        root.addChild(childOfRoot1);
+        Node childOfRoot2 = new Node(13);
+        root.addChild(childOfRoot2);
+
+        Node connectedChild1 = new Node(20);
+        childOfRoot1.addChild(connectedChild1);
+        Node connectedChild2 = new Node(21);
+        childOfRoot2.addChild(connectedChild2);
+        connectedChild1.addChild(connectedChild2);
+        connectedChild2.addChild(connectedChild1);
+
+        Node childOfRoot2Child = new Node(3);
+        childOfRoot2.addChild(childOfRoot2Child);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(childOfRoot2Child);
+        descendants.add(connectedChild1);
+
+        // TODO: the functionality for this test isn't implemented in part 1 so this
+        // will cause a StackOverflow. Change this to assertEquals(childOfRoot2,
+        // result); once part 2 is implemented.
+        assertThrows(StackOverflowError.class, () -> {
+            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        });
+    }
 }
