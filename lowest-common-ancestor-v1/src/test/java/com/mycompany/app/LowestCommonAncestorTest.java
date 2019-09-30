@@ -24,17 +24,17 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenEmptyDescendantsListOfShouldReturnNull() {
+    public void givenNullListOfDescendantsShouldReturnNull() {
         Node root = new Node(5);
-        List<Node> descendants = new LinkedList<>();
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, null);
         assertNull(result);
     }
 
     @Test
-    public void givenNullListOfDescendantsShouldReturnNull() {
+    public void givenEmptyDescendantsListOfShouldReturnNull() {
         Node root = new Node(5);
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, null);
+        List<Node> descendants = new LinkedList<>();
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
         assertNull(result);
     }
 
