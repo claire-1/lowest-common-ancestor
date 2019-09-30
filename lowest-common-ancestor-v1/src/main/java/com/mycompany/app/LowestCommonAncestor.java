@@ -13,7 +13,24 @@ import com.mycompany.utils.Node;
  */
 public class LowestCommonAncestor {
 
-  // Method to ensure all nodes in the list of descendants are in the tree.
+  // Method to get the Lowest Common Ancestor from a tree.
+  public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
+
+    if (root == null || descendants == null || descendants.size() == 0) {
+      return null;
+    }
+
+    for (Node descendant : descendants) {
+      if (!pathExists(root, descendant)) {
+        throw new InvalidParameterException("Node not in tree.");
+      }
+    }
+
+    return getLowestCommonAncestorHelper(root, descendants);
+  }
+
+  // Method to ensure all nodes in the list of descendants are in the tree. TODO
+  // what if I make this very long will it format it?
   private static boolean pathExists(Node root, Node nodeToFind) {
     if (root == null) {
       return false;
@@ -30,23 +47,6 @@ public class LowestCommonAncestor {
     }
 
     return false;
-  }
-
-  // Method to get the Lowest Common Ancestor from a tree.
-  public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
-
-    if (root == null || descendants == null || descendants.size() == 0) {
-      return null;
-    }
-
-    for (Node descendant : descendants) {
-      if (!pathExists(root, descendant)) {
-        throw new InvalidParameterException("Node not in tree.");
-      }
-    }
-
-    return getLowestCommonAncestorHelper(root, descendants);
-
   }
 
   // Method to do the work of finding the lowest common ancestor for a tree.

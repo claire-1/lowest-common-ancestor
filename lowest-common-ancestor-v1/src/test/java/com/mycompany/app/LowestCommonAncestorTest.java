@@ -43,7 +43,7 @@ public class LowestCommonAncestorTest {
         Node root = new Node(5);
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
-        
+
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
         assertEquals(root, result);
     }
@@ -99,7 +99,6 @@ public class LowestCommonAncestorTest {
         assertEquals(firstSubtreeRoot, result);
     }
 
-  
     @Test
     // Allowing a node to be an ancestor of itself
     public void givenTreeWithRootInDescendantsShouldReturnRoot() {
