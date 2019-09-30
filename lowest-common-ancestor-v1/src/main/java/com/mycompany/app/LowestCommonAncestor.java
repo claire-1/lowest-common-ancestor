@@ -33,7 +33,7 @@ public class LowestCommonAncestor {
 
   public static Node getLowestCommonAncestor(Node root, List<Node> descendants) {
 
-    if (root == null || descendants.size() == 0) {
+    if (root == null || descendants == null || descendants.size() == 0) {
       return null;
     }
 
