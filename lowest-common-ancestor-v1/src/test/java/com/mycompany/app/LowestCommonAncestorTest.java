@@ -24,7 +24,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenNullListOfDescendantsShouldReturnNull() {
+    public void givenNullDescendantsListShouldReturnNull() {
         Node root = new Node(5);
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, null);
         assertNull(result);
@@ -39,7 +39,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenOneNodeInTreeAndDescendantsShouldReturnThatNode() {
+    public void givenOneNodeInTreeShouldReturnThatNode() {
         Node root = new Node(5);
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
@@ -254,4 +254,36 @@ public class LowestCommonAncestorTest {
         });
 
     }
+
+    @Test
+    public void givenTreeWithDuplicateDesendantShouldThrowInvalidParameter() {
+        Node root = new Node(5);
+        Node firstSubtree = new Node(1);
+        root.addChild(firstSubtree);
+        Node secondSubtree = new Node(2);
+        root.addChild(secondSubtree);
+
+        Node firstSubtreeChild1 = new Node(4);
+        firstSubtree.addChild(firstSubtreeChild1);
+        Node firstSubtreeChild2 = new Node(22);
+        firstSubtree.addChild(firstSubtreeChild2);
+
+        Node firstSubtreeChild1Child1 = new Node(11);
+        firstSubtreeChild1.addChild(firstSubtreeChild1Child1);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(firstSubtreeChild1Child1);
+        descendants.add(firstSubtreeChild2);
+        descendants.add(firstSubtreeChild2); // duplicate
+
+        assertThrows(InvalidParameterException.class, () -> {
+            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        });
+
+    }
+
+    // @Test 
+    // public void givenDirectedAcyclicGraphShouldReturnLowestCommonAncestor() {
+        
+    // } 
 }

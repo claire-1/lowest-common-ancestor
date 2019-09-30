@@ -1,6 +1,7 @@
 package com.mycompany.app;
 
 import java.security.InvalidParameterException;
+import java.util.HashSet;
 import java.util.List;
 
 import com.mycompany.utils.Node;
@@ -18,6 +19,10 @@ public class LowestCommonAncestor {
 
     if (root == null || descendants == null || descendants.size() == 0) {
       return null;
+    }
+
+    if (hasDuplicates(descendants)) {
+      throw new InvalidParameterException("Duplicates are not allowed in descendants.");
     }
 
     for (Node descendant : descendants) {
@@ -43,6 +48,23 @@ public class LowestCommonAncestor {
     for (Node child : root.getChildren()) {
       if (pathExists(child, nodeToFind)) {
         return true;
+      }
+    }
+
+    return false;
+  }
+
+  private static boolean hasDuplicates(List<Node> descendants) {
+    // Hash to store seen values
+    HashSet<Node> seenNodes = new HashSet<>();
+
+    for (int i = 0; i < descendants.size(); i++) {
+      Node currentNode = descendants.get(i);
+      // If current value is seen before
+      if (seenNodes.contains(currentNode)) {
+        return true;
+      } else {
+        seenNodes.add(currentNode);
       }
     }
 
