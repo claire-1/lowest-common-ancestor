@@ -61,4 +61,10 @@ public class NodeTest {
 
         assertEquals(0, childOfChildOfParent.getChildren().size());
     }
+
+    @Test
+    public void givenNodeWithDataGetDataShouldGiveTheCorrectData() {
+        Node node = new Node(15);
+        assertEquals(15, node.getData());
+    }
 }

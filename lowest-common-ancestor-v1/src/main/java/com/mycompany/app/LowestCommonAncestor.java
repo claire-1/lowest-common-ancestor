@@ -34,13 +34,8 @@ public class LowestCommonAncestor {
     return getLowestCommonAncestorHelper(root, descendants);
   }
 
-  // Method to ensure all nodes in the list of descendants are in the tree. TODO
-  // what if I make this very long will it format it?
+  // Method to ensure all nodes in the list of descendants are in the tree.
   private static boolean pathExists(Node root, Node nodeToFind) {
-    if (root == null) {
-      return false;
-    }
-
     if (root == nodeToFind) {
       return true;
     }
@@ -73,9 +68,6 @@ public class LowestCommonAncestor {
 
   // Method to do the work of finding the lowest common ancestor for a tree.
   public static Node getLowestCommonAncestorHelper(Node root, List<Node> descendants) {
-    if (root == null) {
-      return null;
-    }
 
     // Descendants contain the root so return the root
     if (descendants.contains(root)) {
