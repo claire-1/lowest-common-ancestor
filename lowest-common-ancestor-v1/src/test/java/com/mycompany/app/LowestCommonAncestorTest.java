@@ -32,6 +32,17 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
+    public void givenOneNodeInTreeAndDescendantsShouldReturnThatNode() {
+        Node root = new Node(5);
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(root);
+        
+        
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(root, result);
+    }
+
+    @Test
     public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
         // Make the tree
         Node root = new Node(5);
@@ -82,12 +93,10 @@ public class LowestCommonAncestorTest {
         assertEquals(firstSubtreeRoot, result);
     }
 
-    // TODO linear example on slides doesn't match wikipedia --> can a node
-    // TODO be an ancestor of itself for this class?
-    // TODO this depends on what should happen in linear case
+  
     @Test
-    public void givenTreeWithRootInDescendantsShouldReturnRoot() { // TODO need this test? lines of code in LCA.java
-                                                                   // already covered so I don't know
+    // Allowing a node to be an ancestor of itself
+    public void givenTreeWithRootInDescendantsShouldReturnRoot() {
         // Make the tree
         Node root = new Node(15);
         Node firstSubtreeRoot = new Node(10);
@@ -113,18 +122,8 @@ public class LowestCommonAncestorTest {
         assertEquals(root, result);
     }
 
-    // TODO linear wikipedia doesn't match slides --> which to follow?
-    // // TODO what is the correct output when the node is in a line?
-    // // TODO the class slides suggest that it can't be the a node looking for
-    // // decendants itself,
-    // // TODO but the online description says that it can be
-    // // TODO "The lowest common ancestor between two nodes n1 and n2 is defined as
-    // // the lowest node in T that has both n1 and n2 as descendants (where we
-    // allow a
-    // // node to be a descendant of itself)"
-    // // TODO from
-    // // https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/
     @Test
+    // Allowing a node to be an ancestor of itself
     public void givenLinearTreeAndNonRootNodesDescendantsShouldReturnNodeClosestToRootInDescendants() {
         // Make the tree
         Node root = new Node(500);
@@ -145,8 +144,7 @@ public class LowestCommonAncestorTest {
         descendants.add(child3);
 
         Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-
-        assertEquals(child3, result); // based on online def TODO
+        assertEquals(child3, result);
     }
 
     @Test
@@ -179,33 +177,64 @@ public class LowestCommonAncestorTest {
         assertEquals(firstSubtreeRoot, result);
     }
 
-    // @Test
-    // public void
-    // givenTreeWithTwoSubtreesAndNodesInDifferentSubtreeShouldReturnRootAsAncestor()
-    // {
-    // // Make the tree - root
-    // Node root = new Node(15);
-    // Node leftSubtreeRoot = new Node(10);
-    // root.addChild(leftSubtreeRoot);
-    // Node rightSubtreeRoot = new Node(25);
-    // root.setRight(rightSubtreeRoot);
+    @Test
+    public void givenTreeWithThreeSubtreesAndDecsendantsInAllThreeDifferentSubtreesShouldReturnRootAsAncestor() {
+        Node root = new Node(12);
+        Node firstSubtreeRoot = new Node(13);
+        root.addChild(firstSubtreeRoot);
+        Node secondSubtreeRoot = new Node(17);
+        root.addChild(secondSubtreeRoot);
+        Node thirdSubtreeRoot = new Node(19);
+        root.addChild(thirdSubtreeRoot);
 
-    // // Make the tree - left subtree
-    // Node leftSubtreeLeftChild = new Node(8);
-    // leftSubtreeRoot.addChild(leftSubtreeLeftChild);
-    // Node leftSubtreeRightChild = new Node(12);
-    // leftSubtreeRoot.setRight(leftSubtreeRightChild);
+        Node firstSubtreeChild1 = new Node(99);
+        firstSubtreeRoot.addChild(firstSubtreeChild1);
+        Node firstSubtreeChild2 = new Node(98);
+        firstSubtreeRoot.addChild(firstSubtreeChild2);
 
-    // // Make the tree - right subtree
-    // Node rightSubtreeLeftChild = new Node(20);
-    // rightSubtreeRoot.addChild(rightSubtreeLeftChild);
-    // Node rightSubtreeRightChild = new Node(30);
-    // rightSubtreeRoot.setRight(rightSubtreeRightChild);
+        Node secondSubtreeChild1 = new Node(88);
+        secondSubtreeRoot.addChild(secondSubtreeChild1);
+        Node secondSubtreeChild2 = new Node(82);
+        secondSubtreeRoot.addChild(secondSubtreeChild2);
+        Node secondSubtreeChild3 = new Node(86);
+        secondSubtreeRoot.addChild(secondSubtreeChild3);
 
-    // Node result = LowestCommonAncestor.getLowestCommonAncestor(root,
-    // rightSubtreeLeftChild, leftSubtreeLeftChild);
-    // assertEquals(root, result);
-    // }
+        Node thirdSubtreeChild1 = new Node(66);
+        thirdSubtreeRoot.addChild(thirdSubtreeChild1);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(firstSubtreeChild2);
+        descendants.add(secondSubtreeChild3);
+        descendants.add(thirdSubtreeRoot);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(root, result);
+    }
+
+    @Test
+    public void givenTreeWithTwoNodesWithSameDataValueAsDesendantsShouldReturnCorrectAncestorWithoutErrors() {
+        Node root = new Node(15);
+        Node subtreeRoot = new Node(12);
+        root.addChild(subtreeRoot);
+
+        Node subtreeChild1 = new Node(19);
+        subtreeRoot.addChild(subtreeChild1);
+        Node subtreeChild2 = new Node(17);
+        subtreeRoot.addChild(subtreeChild2);
+
+        Node subtreeChild1ChildWithRepeatData = new Node(22);
+        subtreeChild1.addChild(subtreeChild1ChildWithRepeatData);
+
+        Node subtreeChild2ChildWithRepeatData = new Node(22);
+        subtreeChild2.addChild(subtreeChild2ChildWithRepeatData);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(subtreeChild1ChildWithRepeatData);
+        descendants.add(subtreeChild2ChildWithRepeatData);
+
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(subtreeRoot, result);
+    }
 
     @Test
     public void givenDesendantNotInTreeShouldThrowAnException() {
