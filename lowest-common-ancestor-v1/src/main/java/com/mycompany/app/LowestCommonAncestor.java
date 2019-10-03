@@ -78,12 +78,16 @@ public class LowestCommonAncestor {
     int count = 0;
 
     // Find the LCA from all the children
-    for (Node node : root.getChildren()) {
-      Node result = getLowestCommonAncestorHelper(node, descendants);
-      if (result != null) {
-        count++;
-        currentLCA = result;
+    try {
+      for (Node node : root.getChildren()) {
+        Node result = getLowestCommonAncestorHelper(node, descendants);
+        if (result != null) {
+          count++;
+          currentLCA = result;
+        }
       }
+    } catch (NullPointerException e) {
+      throw new InvalidParameterException("Tree contains a null node " + e);
     }
 
     if (count == descendants.size()) {

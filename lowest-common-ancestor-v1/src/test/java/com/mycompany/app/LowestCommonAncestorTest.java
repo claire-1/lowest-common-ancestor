@@ -40,7 +40,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenOneNodeInTreeAndDescendantsShouldReturnThatNode() {
+    public void givenOneNodeInTreeAndInDescendantsShouldReturnThatNode() {
         Node root = new Node(5);
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
@@ -243,6 +243,24 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
+    public void givenTreeWithNullNodeShouldTODO() {
+        Node root = new Node(14);
+        Node child1 = new Node(16);
+        root.addChild(child1);
+        Node child2 = new Node(17);
+        root.addChild(child2);
+        root.addChild(null);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child1);
+        descendants.add(child2);
+
+        assertThrows(InvalidParameterException.class, () -> {
+            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        });        
+    }
+
+    @Test
     public void givenDesendantNotInTreeShouldThrowInvalidParameterException() {
         Node root = new Node(5);
         Node notInTree = new Node(700);
@@ -285,7 +303,8 @@ public class LowestCommonAncestorTest {
 
     @Test
     // TODO: this functionality will be implemented in part 2 and should
-    // return the correct node then. 
+    // return the correct node then. For part 1, it should simply
+    // not thrown an exception. 
     public void givenDirectedAcyclicGraphInPartOneShouldNotThrowAnException() {
         Node root = new Node(15);
         Node childOfRoot1 = new Node(12);
