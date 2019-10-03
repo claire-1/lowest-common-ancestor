@@ -243,13 +243,13 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenTreeWithNullNodeShouldTODO() {
+    public void givenTreeWithNullNodeShouldThrowInvalidParameterException() {
         Node root = new Node(14);
         Node child1 = new Node(16);
         root.addChild(child1);
         Node child2 = new Node(17);
         root.addChild(child2);
-        root.addChild(null);
+        root.addChild(null); // null node
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(child1);
@@ -258,6 +258,24 @@ public class LowestCommonAncestorTest {
         assertThrows(InvalidParameterException.class, () -> {
             LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
         });        
+    }
+
+    @Test
+    public void givenTreeWithNullNodeInDescendantsShouldThrowInvalidParameterException() {
+        Node root = new Node(14);
+        Node child1 = new Node(16);
+        root.addChild(child1);
+        Node child2 = new Node(17);
+        root.addChild(child2);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child1);
+        descendants.add(child2);
+        descendants.add(null); // null descendant
+
+        assertThrows(InvalidParameterException.class, () -> {
+            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        });
     }
 
     @Test
