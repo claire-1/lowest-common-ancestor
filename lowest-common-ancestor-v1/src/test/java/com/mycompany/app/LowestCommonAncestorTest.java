@@ -14,7 +14,7 @@ import com.mycompany.utils.Node;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit test for LowestCommonAncestor. TODO create a script to run the tests
+ * Unit test for LowestCommonAncestor.
  */
 public class LowestCommonAncestorTest {
 
