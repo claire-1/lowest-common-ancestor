@@ -2,6 +2,7 @@ package com.mycompany.app;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.mycompany.utils.Node;
@@ -24,29 +25,40 @@ public class LowestCommonAncestor {
     if (hasDuplicates(descendants)) {
       throw new InvalidParameterException("Duplicates are not allowed in descendants.");
     }
-
+    
     for (Node descendant : descendants) {
-      if (!pathExists(root, descendant)) {
+      LinkedList<Node> path = new LinkedList<>();
+      path.add(root);
+      path = pathExists(root, descendant, path);
+      if (!path.contains(descendant)) { // TODO this isn't right --> probably need to check if the descendant is in the path
         throw new InvalidParameterException("Node not in tree.");
       }
+      
+      // TODO delete this
+      System.out.println("THE PATH IS: ");
+      for (Node node : path) {
+        System.out.println("NODE "+ node.getData());
+      }
+
     }
 
     return getLowestCommonAncestorHelper(root, descendants);
   }
 
   // Method to ensure all nodes in the list of descendants are in the tree.
-  private static boolean pathExists(Node root, Node nodeToFind) {
-    if (root == nodeToFind) {
-      return true;
+  private static LinkedList<Node> pathExists(Node root, Node nodeToFind, LinkedList<Node> path) {
+    if (root == nodeToFind && !path.contains(root)) {
+      path.add(root);
+      return path;
     }
 
     for (Node child : root.getChildren()) {
-      if (pathExists(child, nodeToFind)) {
-        return true;
+      if (pathExists(child, nodeToFind, path).size() != 1) {
+        return path;
       }
     }
 
-    return false;
+    return path;
   }
 
   private static boolean hasDuplicates(List<Node> descendants) {
@@ -65,6 +77,13 @@ public class LowestCommonAncestor {
 
     return false;
   }
+
+  // public static Set<Node> getLowestCommonAncestorForDirectedAcyclicGraph(DirectedGraph<Node, Node> graph,
+  //     Node descendant1, Node descendant2) {
+  //   // from https://jgrapht.org/javadoc/org/jgrapht/alg/lca/NaiveLCAFinder.html
+  //   NaiveLcaFinder<Node, Node> lcaFinder = new NaiveLcaFinder<>(graph);
+  //   return lcaFinder.findLcas(descendant1, descendant2);
+  // }
 
   // Method to do the work of finding the lowest common ancestor for a tree.
   public static Node getLowestCommonAncestorHelper(Node root, List<Node> descendants) {
