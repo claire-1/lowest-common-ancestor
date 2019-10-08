@@ -72,10 +72,18 @@ public class LowestCommonAncestor {
   }
 
   public static Set<Node> getLowestCommonAncestorForDirectedAcyclicGraph(Graph<Node, DefaultEdge> graph,
-      Node descendant1, Node descendant2) {
+      List<Node> descendants) {
     // from https://jgrapht.org/javadoc/org/jgrapht/alg/lca/NaiveLCAFinder.html
+    // source for understanding: https://www.codota.com/code/java/methods/org.jgrapht.alg.DijkstraShortestPath/findPathBetween
+    // Descendants contain the root so return the root
+    if (descendants.size() == 1 && graph.containsVertex(descendants.get(0))) {
+      Set<Node> ancestor = new HashSet<>();
+      ancestor.add(descendants.get(0));  
+      return ancestor;
+    }
+    
     NaiveLcaFinder<Node, DefaultEdge> lcaFinder = new NaiveLcaFinder<>(graph);
-    return lcaFinder.findLcas(descendant1, descendant2);
+    return lcaFinder.findLcas(descendants.get(0), descendants.get(1));
   }
 
   // Method to do the work of finding the lowest common ancestor for a tree.

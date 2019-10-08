@@ -41,35 +41,24 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenOneNodeInTreeAndInDescendantsShouldReturnThatNode() {
+    public void givenOneNodeInTreeAndThatOneInDescendantsShouldReturnThatNode() {
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
         Node root = new Node(5);
+        graph.addVertex(root);
+
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
 
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-        assertEquals(root, result);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+
+        Set<Node> expected = new HashSet<Node>();
+        expected.add(root);
+
+        assertEquals(expected, result);
     }
 
     @Test
     public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
-        // Make the tree
-        Node root = new Node(5);
-        Node child1 = new Node(4);
-        Node child2 = new Node(8);
-        root.addChild(child1);
-        root.addChild(child2);
-
-        List<Node> descendants = new LinkedList<>();
-        descendants.add(child1);
-        descendants.add(child2);
-
-        // Get the common ancestor
-        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-        assertEquals(root, result);
-    }
-
-    @Test
-    public void TODO() {
         // From
         // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java
         Node root = new Node(1);
@@ -83,16 +72,22 @@ public class LowestCommonAncestorTest {
         graph.addEdge(root, child1);
         graph.addEdge(root, child2);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, child1, child2);
-        final Set<Node> expected = new HashSet<Node>();
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(child1);
+        descendants.add(child2);
+
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> expected = new HashSet<Node>();
         expected.add(root);
         assertEquals(expected, result);
     }
 
     @Test
     public void givenDirectedAcyclicGraphAndConnectedNodesWithTwoPossibleAncestorShouldReturnLowestAncestor() {
+        // Source for how to use graph class:
+        // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java
         DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
-        
+
         Node root = new Node(15);
         graph.addVertex(root);
         Node childOfRoot1 = new Node(12);
@@ -120,21 +115,13 @@ public class LowestCommonAncestorTest {
         graph.addEdge(childOfRoot2, childOfChildOfRoot2);
         childOfRoot2.addChild(childOfChildOfRoot2);
 
-        List<Node> descendants = new LinkedList<>(); // TODO need to change so this is needed again
+        List<Node> descendants = new LinkedList<>();
         descendants.add(childOfChildOfRoot2);
         descendants.add(connectedChild1);
 
-        // TODO: the functionality for this test isn't implemented in part 1 so this
-        // will give the incorrect node for part 1 but shouldn't throw an exception.
-        // Change this to assertEquals(childOfRoot2, result); once part 2 is
-        // implemented.
-       // Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, childOfChildOfRoot2, connectedChild1);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
         final Set<Node> expected = new HashSet<Node>();
         expected.add(childOfRoot2);
-       // System.out.println("RESULT " + result.getData());
-
 
         assertEquals(expected, result);
     }
