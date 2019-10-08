@@ -1,6 +1,5 @@
 package com.mycompany.app;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -318,12 +317,38 @@ public class LowestCommonAncestorTest {
         });
 
     }
+    
+    // @Test
+    // public void givenDirectedAcyclicGraphAndConnectedNodesWithTwoPossibleAncestorShouldReturnLowestAncestor() {
+    //     Node root = new Node(15);
+    //     Node childOfRoot1 = new Node(12);
+    //     root.addChild(childOfRoot1);
+    //     Node childOfRoot2 = new Node(13);
+    //     root.addChild(childOfRoot2);
+
+    //     Node connectedChild1 = new Node(20);
+    //     childOfRoot1.addChild(connectedChild1);
+    //     Node connectedChild2 = new Node(21);
+    //     childOfRoot2.addChild(connectedChild2);
+    //     connectedChild2.addChild(connectedChild1);
+
+    //     Node childOfChildOfRoot2 = new Node(3);
+    //     childOfRoot2.addChild(childOfChildOfRoot2);
+
+    //     List<Node> descendants = new LinkedList<>();
+    //     descendants.add(childOfChildOfRoot2);
+    //     descendants.add(connectedChild1);
+
+    //     // TODO: the functionality for this test isn't implemented in part 1 so this
+    //     // will give the incorrect node for part 1 but shouldn't throw an exception.
+    //     // Change this to assertEquals(childOfRoot2, result); once part 2 is
+    //     // implemented.
+    //     Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+    //     assertEquals(childOfRoot2, result);
+    // }
 
     @Test
-    // TODO: this functionality will be implemented in part 2 and should
-    // return the correct node then. For part 1, it should simply
-    // not thrown an exception. 
-    public void givenDirectedAcyclicGraphInPartOneShouldNotThrowAnException() {
+    public void givenDirectedAcyclicGraphAndConnectedNodesWithOnePossibleAncestorShouldReturnThatAncestor() {
         Node root = new Node(15);
         Node childOfRoot1 = new Node(12);
         root.addChild(childOfRoot1);
@@ -334,22 +359,21 @@ public class LowestCommonAncestorTest {
         childOfRoot1.addChild(connectedChild1);
         Node connectedChild2 = new Node(21);
         childOfRoot2.addChild(connectedChild2);
-        connectedChild1.addChild(connectedChild2);
+        connectedChild2.addChild(connectedChild1);
 
-        Node childOfRoot2Child = new Node(3);
-        childOfRoot2.addChild(childOfRoot2Child);
+        Node childOfChildOfRoot2 = new Node(3);
+        childOfRoot2.addChild(childOfChildOfRoot2);
 
         List<Node> descendants = new LinkedList<>();
-        descendants.add(childOfRoot2Child);
-        descendants.add(connectedChild1);
+        descendants.add(connectedChild2);
+        descendants.add(childOfRoot2);
 
         // TODO: the functionality for this test isn't implemented in part 1 so this
         // will give the incorrect node for part 1 but shouldn't throw an exception.
         // Change this to assertEquals(childOfRoot2, result); once part 2 is
         // implemented.
-        assertDoesNotThrow(() -> {
-            LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
-        });
+        Node result = LowestCommonAncestor.getLowestCommonAncestor(root, descendants);
+        assertEquals(childOfRoot2, result);
     }
 
     @Test
