@@ -76,13 +76,29 @@ public class LowestCommonAncestor {
     // from https://jgrapht.org/javadoc/org/jgrapht/alg/lca/NaiveLCAFinder.html
     // source for understanding: https://www.codota.com/code/java/methods/org.jgrapht.alg.DijkstraShortestPath/findPathBetween
     // Descendants contain the root so return the root
+    if (graph == null || descendants == null || graph.vertexSet().size() == 0 || descendants.size() == 0) {
+      return null;
+    }    
+    
+    if (descendants.size() > 2) {
+      // TODO: possible allow more than two descendants in the future
+      // This is simple for binary trees but complicated for directed, acyclic graphs.
+      throw new InvalidParameterException("More than two descendants isn't allowed right now");
+    }
     if (descendants.size() == 1 && graph.containsVertex(descendants.get(0))) {
       Set<Node> ancestor = new HashSet<>();
       ancestor.add(descendants.get(0));  
       return ancestor;
     }
     
+    for (Node descendant : descendants) {
+      if (!graph.containsVertex(descendant)) {
+        throw new InvalidParameterException("Node not in graph.");
+      }
+    }
+
     NaiveLcaFinder<Node, DefaultEdge> lcaFinder = new NaiveLcaFinder<>(graph);
+
     return lcaFinder.findLcas(descendants.get(0), descendants.get(1));
   }
 
