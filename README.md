@@ -3,7 +3,7 @@
 Part 1 is implemented separately in the lowest-common-ancestor-v1 directory (which was modified up to commit d61e782f49f30be7d66b5b7dfbb50009aa445919). Its functionality is shown in the lowest-common-ancestor directory as well, but I kept a separate directory because the implementation changed a lot for directed acyclic graphs. 
 
 ## Lowest Common Ancestor Part 2
-Part 2 was implemented on the branch `v2` in the directory lowest-common-ancestor, which was then merged with master.
+Part 2 was implemented on the branch `v2` in the directory lowest-common-ancestor, which was then merged with master in commit de732f78cc717aa68e76e978e61134a6df5a46bf.
 This part allows for you to specify two descendants to find the LCA of because directed acyclic graphs can have multiple LCAs at a time and allowing for more descendants gets very complicated very quickly. 
 
 ## Requirements: 
