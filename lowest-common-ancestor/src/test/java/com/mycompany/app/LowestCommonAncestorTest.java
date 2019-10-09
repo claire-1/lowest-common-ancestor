@@ -30,7 +30,7 @@ public class LowestCommonAncestorTest {
         Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(null, descendants);
         assertNull(result);
     }
-    
+
     @Test
     public void givenEmptyGraphShouldReturnNull() {
         DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
@@ -83,13 +83,12 @@ public class LowestCommonAncestorTest {
 
     @Test
     public void givenTreeWithRootAndTwoChildrenShouldReturnRootAsAncestorOfChildren() {
-        // From
-        // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
+
         Node root = new Node(1);
         Node child1 = new Node(2);
         Node child2 = new Node(3);
 
-        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
         graph.addVertex(root);
         graph.addVertex(child1);
         graph.addVertex(child2);
@@ -103,50 +102,6 @@ public class LowestCommonAncestorTest {
         Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(root);
-        assertEquals(expected, result);
-    }
-
-    @Test
-    public void givenDirectedAcyclicGraphAndConnectedNodesWithTwoPossibleAncestorShouldReturnLowestAncestor() {
-        // Source for how to use graph class:
-        // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java
-        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
-
-        Node root = new Node(15);
-        graph.addVertex(root);
-        Node childOfRoot1 = new Node(12);
-        graph.addVertex(childOfRoot1);
-        graph.addEdge(root, childOfRoot1);
-        root.addChild(childOfRoot1);
-        Node childOfRoot2 = new Node(13);
-        graph.addVertex(childOfRoot2);
-        graph.addEdge(root, childOfRoot2);
-        root.addChild(childOfRoot2);
-
-        Node connectedChild1 = new Node(20);
-        graph.addVertex(connectedChild1);
-        graph.addEdge(childOfRoot1, connectedChild1);
-        childOfRoot1.addChild(connectedChild1);
-        Node connectedChild2 = new Node(21);
-        graph.addVertex(connectedChild2);
-        graph.addEdge(childOfRoot2, connectedChild2);
-        childOfRoot2.addChild(connectedChild2);
-        graph.addEdge(connectedChild2, connectedChild1);
-        connectedChild2.addChild(connectedChild1);
-
-        Node childOfChildOfRoot2 = new Node(3);
-        graph.addVertex(childOfChildOfRoot2);
-        graph.addEdge(childOfRoot2, childOfChildOfRoot2);
-        childOfRoot2.addChild(childOfChildOfRoot2);
-
-        List<Node> descendants = new LinkedList<>();
-        descendants.add(childOfChildOfRoot2);
-        descendants.add(connectedChild1);
-
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
-        Set<Node> expected = new HashSet<Node>();
-        expected.add(childOfRoot2);
-
         assertEquals(expected, result);
     }
 
@@ -213,9 +168,6 @@ public class LowestCommonAncestorTest {
 
         graph.addEdge(root, firstSubtreeRoot);
         graph.addEdge(root, secondSubtreeRoot);
-
-        // root.addChild(firstSubtreeRoot);
-        // root.addChild(secondSubtreeRoot);
 
         Node firstSubtreeFirstChild = new Node(12);
         graph.addVertex(firstSubtreeFirstChild);
@@ -431,7 +383,7 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    public void givenTreeWithDuplicateDesendantShouldReturnDescendant() {
+    public void givenGraphWithDuplicateDesendantShouldReturnDescendant() {
         DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
 
         Node root = new Node(5);
@@ -454,8 +406,6 @@ public class LowestCommonAncestorTest {
         expected.add(secondSubtree);
         assertEquals(expected, result);
     }
-
-    // TODO: write in README: a tree with a null node can't be constructed
 
     @Test
     public void givenTreeWithNullNodeInDescendantsShouldThrowInvalidParameterException() {
@@ -524,6 +474,8 @@ public class LowestCommonAncestorTest {
         });
     }
 
+
+
     @Test
     public void givenDirectedAcyclicGraphAndConnectedNodesWithOnePossibleAncestorShouldReturnThatAncestor() {
         DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
@@ -566,9 +518,70 @@ public class LowestCommonAncestorTest {
     }
 
     @Test
-    // TODO: this functionality will be implemented in part 2 and StackOverflow
-    // will no longer be expected.
-    public void givenGraphWithCycleInPartOneShouldNotBeAbleToConstructGraph() {
+    public void givenDirectedAcyclicGraphAndConnectedNodesWithTwoPossibleAncestorShouldReturnLowestAncestor() {
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
+
+        Node root = new Node(15);
+        graph.addVertex(root);
+        Node childOfRoot1 = new Node(12);
+        graph.addVertex(childOfRoot1);
+        graph.addEdge(root, childOfRoot1);
+        root.addChild(childOfRoot1);
+        Node childOfRoot2 = new Node(13);
+        graph.addVertex(childOfRoot2);
+        graph.addEdge(root, childOfRoot2);
+        root.addChild(childOfRoot2);
+
+        Node connectedChild1 = new Node(20);
+        graph.addVertex(connectedChild1);
+        graph.addEdge(childOfRoot1, connectedChild1);
+        childOfRoot1.addChild(connectedChild1);
+        Node connectedChild2 = new Node(21);
+        graph.addVertex(connectedChild2);
+        graph.addEdge(childOfRoot2, connectedChild2);
+        childOfRoot2.addChild(connectedChild2);
+        graph.addEdge(connectedChild2, connectedChild1);
+        connectedChild2.addChild(connectedChild1);
+
+        Node childOfChildOfRoot2 = new Node(3);
+        graph.addVertex(childOfChildOfRoot2);
+        graph.addEdge(childOfRoot2, childOfChildOfRoot2);
+        childOfRoot2.addChild(childOfChildOfRoot2);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(childOfChildOfRoot2);
+        descendants.add(connectedChild1);
+
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> expected = new HashSet<Node>();
+        expected.add(childOfRoot2);
+
+        assertEquals(expected, result);
+    }
+
+
+    @Test
+    public void givenNullNodeShouldNotBeAbleToConstructGraph() {
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
+
+        assertThrows(NullPointerException.class, () -> {
+            graph.addVertex(null);
+        });
+    }
+
+    @Test
+    public void givenNullEdgeShouldNotBeAbleToConstructGraph() {
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
+        Node root = new Node(12);
+        graph.addVertex(root);
+
+        assertThrows(NullPointerException.class, () -> {
+            graph.addEdge(root, null);
+        });
+    }
+    
+    @Test
+    public void givenCycleShouldNotBeAbleToConstructGraph() {
         DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
 
         Node root = new Node(15);
@@ -618,4 +631,25 @@ public class LowestCommonAncestorTest {
         assertEquals(expected, result);
     }
 
+
+    @Test
+    public void givenGraphWithNoEdgesShouldReturnNoNodes() {
+        DirectedAcyclicGraph<Node, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
+
+        Node node1 = new Node(1);
+        graph.addVertex(node1);
+        Node node2 = new Node(2);
+        graph.addVertex(node2);
+        Node node3 = new Node(3);
+        graph.addVertex(node3);
+        Node node4 = new Node(4);
+        graph.addVertex(node4);
+
+        List<Node> descendants = new LinkedList<>();
+        descendants.add(node3);
+        descendants.add(node4);
+
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        assertEquals(new HashSet<>(), result);
+    }
 }
