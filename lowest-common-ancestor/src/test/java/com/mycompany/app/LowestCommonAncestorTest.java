@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import com.mycompany.utils.Node;
+import com.mycompany.app.LowestCommonAncestor.Node;
 
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DirectedAcyclicGraph;
@@ -27,7 +27,7 @@ public class LowestCommonAncestorTest {
         Node notInTree = new Node(44);
         descendants.add(notInTree);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(null, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(null, descendants);
         assertNull(result);
     }
 
@@ -39,7 +39,7 @@ public class LowestCommonAncestorTest {
         Node notInTree = new Node(44);
         descendants.add(notInTree);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         assertNull(result);
     }
 
@@ -49,7 +49,7 @@ public class LowestCommonAncestorTest {
         Node root = new Node(5);
         graph.addVertex(root);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, null);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, null);
         assertNull(result);
     }
 
@@ -60,7 +60,7 @@ public class LowestCommonAncestorTest {
         graph.addVertex(root);
 
         List<Node> descendants = new LinkedList<>();
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         assertNull(result);
     }
 
@@ -73,7 +73,7 @@ public class LowestCommonAncestorTest {
         List<Node> descendants = new LinkedList<>();
         descendants.add(root);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
 
         Set<Node> expected = new HashSet<Node>();
         expected.add(root);
@@ -99,7 +99,7 @@ public class LowestCommonAncestorTest {
         descendants.add(child1);
         descendants.add(child2);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(root);
         assertEquals(expected, result);
@@ -128,8 +128,6 @@ public class LowestCommonAncestorTest {
         Node secondSubtreeRoot = new Node(2);
         graph.addVertex(secondSubtreeRoot);
         graph.addEdge(firstSubtreeRoot, secondSubtreeRoot);
-        firstSubtreeRoot.addChild(subtreeChild1);
-        firstSubtreeRoot.addChild(secondSubtreeRoot);
 
         // Make second subtree with three nodes for one root
         Node secondSubtreeChild1 = new Node(77);
@@ -147,7 +145,7 @@ public class LowestCommonAncestorTest {
         descendants.add(subtreeChild1);
         descendants.add(secondSubtreeChild3);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(firstSubtreeRoot);
 
@@ -187,7 +185,7 @@ public class LowestCommonAncestorTest {
         descendants.add(firstSubtreeThirdChild);
 
         // Get the common ancestor
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(root);
 
@@ -202,32 +200,32 @@ public class LowestCommonAncestorTest {
 
         Node root = new Node(500);
         graph.addVertex(root);
+        
         Node child1 = new Node(200);
         graph.addVertex(child1);
         graph.addEdge(root, child1);
-        // root.addChild(child1);
+
         Node child2 = new Node(40);
         graph.addVertex(child2);
         graph.addEdge(child1, child2);
-        // child1.addChild(child2);
+
         Node child3 = new Node(10);
         graph.addVertex(child3);
         graph.addEdge(child2, child3);
-        // child2.addChild(child3);
+
         Node child4 = new Node(5);
         graph.addVertex(child4);
         graph.addEdge(child3, child4);
-        // child3.addChild(child4);
+
         Node child5 = new Node(0);
         graph.addVertex(child5);
         graph.addEdge(child4, child5);
-        // child4.addChild(child5);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(child5);
         descendants.add(child3);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(child3);
 
@@ -245,11 +243,8 @@ public class LowestCommonAncestorTest {
 
         Node secondSubtreeRoot = new Node(25);
         graph.addVertex(secondSubtreeRoot);
-
         graph.addEdge(root, firstSubtreeRoot);
-        // root.addChild(firstSubtreeRoot);
         graph.addEdge(root, secondSubtreeRoot);
-        // root.addChild(secondSubtreeRoot);
 
         Node firstSubtreeFirstChild = new Node(12);
         graph.addVertex(firstSubtreeFirstChild);
@@ -261,13 +256,8 @@ public class LowestCommonAncestorTest {
         graph.addVertex(firstSubtreeThirdChild);
 
         graph.addEdge(firstSubtreeRoot, firstSubtreeFirstChild);
-        // firstSubtreeRoot.addChild(firstSubtreeFirstChild);
         graph.addEdge(firstSubtreeRoot, firstSubtreeSecondChild);
-
-        // firstSubtreeRoot.addChild(firstSubtreeSecondChild);
         graph.addEdge(firstSubtreeRoot, firstSubtreeThirdChild);
-
-        // firstSubtreeRoot.addChild(firstSubtreeThirdChild);
 
         Node secondSubtreeFirstChild = new Node(12);
         graph.addVertex(secondSubtreeFirstChild);
@@ -277,19 +267,14 @@ public class LowestCommonAncestorTest {
         graph.addVertex(secondSubtreeThirdChild);
 
         graph.addEdge(secondSubtreeRoot, secondSubtreeFirstChild);
-        secondSubtreeRoot.addChild(secondSubtreeFirstChild);
         graph.addEdge(secondSubtreeRoot, secondSubtreeSecondChild);
-
-        secondSubtreeRoot.addChild(secondSubtreeSecondChild);
         graph.addEdge(secondSubtreeRoot, secondSubtreeThirdChild);
-
-        secondSubtreeRoot.addChild(secondSubtreeThirdChild);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(firstSubtreeFirstChild);
         descendants.add(firstSubtreeThirdChild);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(firstSubtreeRoot);
         assertEquals(expected, result);
@@ -301,51 +286,48 @@ public class LowestCommonAncestorTest {
 
         Node root = new Node(12);
         graph.addVertex(root);
+        
         Node firstSubtreeRoot = new Node(13);
         graph.addVertex(firstSubtreeRoot);
         graph.addEdge(root, firstSubtreeRoot);
-        // root.addChild(firstSubtreeRoot);
+
         Node secondSubtreeRoot = new Node(17);
         graph.addVertex(secondSubtreeRoot);
         graph.addEdge(root, secondSubtreeRoot);
-        root.addChild(secondSubtreeRoot);
+
         Node thirdSubtreeRoot = new Node(19);
         graph.addVertex(thirdSubtreeRoot);
         graph.addEdge(root, thirdSubtreeRoot);
-        root.addChild(thirdSubtreeRoot);
 
         Node firstSubtreeChild1 = new Node(99);
         graph.addVertex(firstSubtreeChild1);
         graph.addEdge(firstSubtreeRoot, firstSubtreeChild1);
-        // firstSubtreeRoot.addChild(firstSubtreeChild1);
+
         Node firstSubtreeChild2 = new Node(98);
         graph.addVertex(firstSubtreeChild2);
         graph.addEdge(firstSubtreeRoot, firstSubtreeChild2);
-        firstSubtreeRoot.addChild(firstSubtreeChild2);
 
         Node secondSubtreeChild1 = new Node(88);
         graph.addVertex(secondSubtreeChild1);
         graph.addEdge(secondSubtreeRoot, secondSubtreeChild1);
-        secondSubtreeRoot.addChild(secondSubtreeChild1);
+
         Node secondSubtreeChild2 = new Node(82);
         graph.addVertex(secondSubtreeChild2);
         graph.addEdge(secondSubtreeRoot, secondSubtreeChild2);
-        secondSubtreeRoot.addChild(secondSubtreeChild2);
+
         Node secondSubtreeChild3 = new Node(86);
         graph.addVertex(secondSubtreeChild3);
         graph.addEdge(secondSubtreeRoot, secondSubtreeChild3);
-        secondSubtreeRoot.addChild(secondSubtreeChild3);
 
         Node thirdSubtreeChild1 = new Node(66);
         graph.addVertex(thirdSubtreeChild1);
         graph.addEdge(thirdSubtreeRoot, thirdSubtreeChild1);
-        thirdSubtreeRoot.addChild(thirdSubtreeChild1);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(firstSubtreeChild2);
         descendants.add(thirdSubtreeRoot);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(root);
         assertEquals(expected, result);
@@ -360,23 +342,20 @@ public class LowestCommonAncestorTest {
         Node subtreeRoot = new Node(12);
         graph.addVertex(subtreeRoot);
         graph.addEdge(root, subtreeRoot);
-        // root.addChild(subtreeRoot);
 
         Node subtreeChild1WithRepeatData = new Node(22);
         graph.addVertex(subtreeChild1WithRepeatData);
         graph.addEdge(subtreeRoot, subtreeChild1WithRepeatData);
-        // subtreeRoot.addChild(subtreeChild1);
+
         Node subtreeChild2WithRepeatData = new Node(22);
         graph.addVertex(subtreeChild2WithRepeatData);
         graph.addEdge(subtreeRoot, subtreeChild2WithRepeatData);
-
-        // subtreeRoot.addChild(subtreeChild2);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(subtreeChild1WithRepeatData);
         descendants.add(subtreeChild2WithRepeatData);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(subtreeRoot);
         assertEquals(expected, result);
@@ -391,17 +370,16 @@ public class LowestCommonAncestorTest {
         Node firstSubtree = new Node(1);
         graph.addVertex(firstSubtree);
         graph.addEdge(root, firstSubtree);
-        root.addChild(firstSubtree);
+
         Node secondSubtree = new Node(2);
         graph.addVertex(secondSubtree);
         graph.addEdge(root, secondSubtree);
-        root.addChild(secondSubtree);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(secondSubtree);
         descendants.add(secondSubtree); // duplicate
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(secondSubtree);
         assertEquals(expected, result);
@@ -416,14 +394,13 @@ public class LowestCommonAncestorTest {
         Node child1 = new Node(16);
         graph.addVertex(child1);
         graph.addEdge(root, child1);
-        root.addChild(child1);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(child1);
         descendants.add(null); // null descendant
 
         assertThrows(InvalidParameterException.class, () -> {
-            LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+            LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         });
     }
 
@@ -440,7 +417,7 @@ public class LowestCommonAncestorTest {
         descendants.add(notInTree);
 
         assertThrows(InvalidParameterException.class, () -> {
-            LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+            LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         });
 
     }
@@ -451,18 +428,18 @@ public class LowestCommonAncestorTest {
 
         Node root = new Node(14);
         graph.addVertex(root);
+       
         Node child1 = new Node(16);
         graph.addVertex(child1);
         graph.addEdge(root, child1);
-        root.addChild(child1);
+
         Node child2 = new Node(16);
         graph.addVertex(child2);
         graph.addEdge(root, child2);
-        root.addChild(child2);
+
         Node child3 = new Node(16);
         graph.addVertex(child3);
         graph.addEdge(root, child3);
-        root.addChild(child3);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(child1);
@@ -470,7 +447,7 @@ public class LowestCommonAncestorTest {
         descendants.add(child3);
 
         assertThrows(InvalidParameterException.class, () -> {
-            LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+            LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         });
     }
 
@@ -482,36 +459,33 @@ public class LowestCommonAncestorTest {
 
         Node root = new Node(15);
         graph.addVertex(root);
+       
         Node childOfRoot1 = new Node(12);
         graph.addVertex(childOfRoot1);
         graph.addEdge(root, childOfRoot1);
-        root.addChild(childOfRoot1);
+
         Node childOfRoot2 = new Node(13);
         graph.addVertex(childOfRoot2);
         graph.addEdge(root, childOfRoot2);
-        root.addChild(childOfRoot2);
 
         Node connectedChild1 = new Node(20);
         graph.addVertex(connectedChild1);
         graph.addEdge(childOfRoot1, connectedChild1);
-        childOfRoot1.addChild(connectedChild1);
+
         Node connectedChild2 = new Node(21);
         graph.addVertex(connectedChild2);
         graph.addEdge(childOfRoot2, connectedChild2);
         graph.addEdge(connectedChild2, connectedChild1);
-        // childOfRoot2.addChild(connectedChild2);
-        // connectedChild2.addChild(connectedChild1);
 
         Node childOfChildOfRoot2 = new Node(3);
         graph.addVertex(childOfChildOfRoot2);
         graph.addEdge(childOfRoot2, childOfChildOfRoot2);
-        childOfRoot2.addChild(childOfChildOfRoot2);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(connectedChild2);
         descendants.add(childOfRoot2);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(childOfRoot2);
         assertEquals(expected, result);
@@ -526,33 +500,29 @@ public class LowestCommonAncestorTest {
         Node childOfRoot1 = new Node(12);
         graph.addVertex(childOfRoot1);
         graph.addEdge(root, childOfRoot1);
-        root.addChild(childOfRoot1);
+
         Node childOfRoot2 = new Node(13);
         graph.addVertex(childOfRoot2);
         graph.addEdge(root, childOfRoot2);
-        root.addChild(childOfRoot2);
 
         Node connectedChild1 = new Node(20);
         graph.addVertex(connectedChild1);
         graph.addEdge(childOfRoot1, connectedChild1);
-        childOfRoot1.addChild(connectedChild1);
+
         Node connectedChild2 = new Node(21);
         graph.addVertex(connectedChild2);
         graph.addEdge(childOfRoot2, connectedChild2);
-        childOfRoot2.addChild(connectedChild2);
         graph.addEdge(connectedChild2, connectedChild1);
-        connectedChild2.addChild(connectedChild1);
 
         Node childOfChildOfRoot2 = new Node(3);
         graph.addVertex(childOfChildOfRoot2);
         graph.addEdge(childOfRoot2, childOfChildOfRoot2);
-        childOfRoot2.addChild(childOfChildOfRoot2);
 
         List<Node> descendants = new LinkedList<>();
         descendants.add(childOfChildOfRoot2);
         descendants.add(connectedChild1);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         Set<Node> expected = new HashSet<Node>();
         expected.add(childOfRoot2);
 
@@ -586,16 +556,15 @@ public class LowestCommonAncestorTest {
 
         Node root = new Node(15);
         graph.addVertex(root);
+        
         Node connectedChild1 = new Node(12);
         graph.addVertex(connectedChild1);
         graph.addEdge(root, connectedChild1);
-        root.addChild(connectedChild1);
+
         Node connectedChild2 = new Node(13);
         graph.addVertex(connectedChild2);
         graph.addEdge(root, connectedChild2);
-
         graph.addEdge(connectedChild1, connectedChild2);
-        root.addChild(connectedChild2);
 
         assertThrows(IllegalArgumentException.class, () -> {
             graph.addEdge(connectedChild2, connectedChild1);
@@ -624,7 +593,7 @@ public class LowestCommonAncestorTest {
         descendants.add(node3);
         descendants.add(node4);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         HashSet<Node> expected = new HashSet<>();
         expected.add(node1);
         expected.add(node2);
@@ -649,7 +618,7 @@ public class LowestCommonAncestorTest {
         descendants.add(node3);
         descendants.add(node4);
 
-        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestorForDirectedAcyclicGraph(graph, descendants);
+        Set<Node> result = LowestCommonAncestor.getLowestCommonAncestor(graph, descendants);
         assertEquals(new HashSet<>(), result);
     }
 }
