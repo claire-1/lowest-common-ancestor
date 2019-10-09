@@ -1,21 +1,29 @@
 # software-engineering-module
 ## Lowest Common Ancestor Part 1
-TODO: say which commit is the last commit for this part once part 2 is done
-This part was done on the master branch. \
-Requirements: 
+Part 1 is implemented separately in the lowest-common-ancestor-v1 directory (which was modified up to commit d61e782f49f30be7d66b5b7dfbb50009aa445919). Its functionality is shown in the lowest-common-ancestor directory as well, but I kept a separate directory because the implementation changed a lot for directed acyclic graphs. 
+
+## Lowest Common Ancestor Part 2
+Part 2 was implemented on the branch `v2` in the directory lowest-common-ancestor, which was then merged with master.
+This part allows for you to specify two descendants to find the LCA of because directed acyclic graphs can have multiple LCAs at a time and allowing for more descendants gets very complicated very quickly. 
+
+## Requirements: 
 - Java 8
 - JUnit 5
 - Maven
 
-To run tests in the lowest-common-ancestor-v1 directory type: `mvn test` 
+## Running Tests
+To run tests in the lowest-common-ancestor-v1 directory or in the lowest-common-ancestor directory type: `mvn test` 
 
 Type `mvn clean` before `mvn test` if you have previously run another maven project and are running into issues with `mvn test`.
 
-To run the tests using Docker in the lowest-common-ancestor-v1 directory type:
-- `sudo docker build . --tag LCA1`
-- `sudo docker run LCA1`
+To run the tests using Docker in the lowest-common-ancestor-v1 directory or in the lowest-common-ancestor directory type:
+- `sudo docker build . --tag lca`
+- `sudo docker run lca`
 
-Sources: \
+## Sources
 Basic Node class: https://stackoverflow.com/questions/3522454/java-tree-data-structure \
 Examples of LCA implementations: https://www.careercup.com/question?id=13437666 and https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/ \
+How to use Java DirectedAcyclicGraph library:         // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java \
+About NaiveLCAFinder in Java https://jgrapht.org/javadoc/org/jgrapht/alg/lca/NaiveLCAFinder.html
+and https://www.codota.com/code/java/methods/org.jgrapht.alg.DijkstraShortestPath/findPathBetween \
 Maven Dockerfile: https://hub.docker.com/_/maven
