@@ -85,6 +85,7 @@ public class LowestCommonAncestor {
       // This is simple for binary trees but complicated for directed, acyclic graphs.
       throw new InvalidParameterException("More than two descendants isn't allowed right now");
     }
+
     if (descendants.size() == 1 && graph.containsVertex(descendants.get(0))) {
       Set<Node> ancestor = new HashSet<>();
       ancestor.add(descendants.get(0));  
