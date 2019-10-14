@@ -6,12 +6,12 @@ Part 1 is implemented separately in the lowest-common-ancestor-v1 directory (whi
 Part 2 was implemented on the branch `v2` in the directory lowest-common-ancestor, which was then merged with master in commit de732f78cc717aa68e76e978e61134a6df5a46bf.
 This part allows for you to specify two descendants to find the LCA of because directed acyclic graphs can have multiple LCAs at a time and allowing for more descendants gets very complicated very quickly. 
 
-## Requirements: 
+### Requirements for Lowest Common Ancestor
 - Java 8
 - JUnit 5
 - Maven
 
-## Running Tests
+### Running Tests for Lowest Common Ancestor
 To run tests in the lowest-common-ancestor-v1 directory or in the lowest-common-ancestor directory type: `mvn test` 
 
 Type `mvn clean` before `mvn test` if you have previously run another maven project and are running into issues with `mvn test`.
@@ -20,10 +20,13 @@ To run the tests using Docker in the lowest-common-ancestor-v1 directory or in t
 - `sudo docker build . --tag lca`
 - `sudo docker run lca`
 
-## Sources
+### Lowest Common Ancestor Sources
 Basic Node class: https://stackoverflow.com/questions/3522454/java-tree-data-structure \
 Examples of LCA implementations: https://www.careercup.com/question?id=13437666 and https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/ \
 How to use Java DirectedAcyclicGraph library:         // https://www.programcreek.com/java-api-examples/?code=taboola/taboola-cronyx/taboola-cronyx-master/taboola-cronyx/src/main/java/com/taboola/cronyx/impl/StdNameAndGroupGraphValidator.java \
 About NaiveLCAFinder in Java https://jgrapht.org/javadoc/org/jgrapht/alg/lca/NaiveLCAFinder.html
 and https://www.codota.com/code/java/methods/org.jgrapht.alg.DijkstraShortestPath/findPathBetween \
 Maven Dockerfile: https://hub.docker.com/_/maven
+
+## Biogrpahy of an Influencal Person in Software Engineering
+My biography of Radia Perlman is in SWEBiographyOfRadiaPerlman.pdf on the master branch. I have included my sources in the footnotes of the paper. 
