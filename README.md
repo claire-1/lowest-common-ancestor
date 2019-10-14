@@ -1,22 +1,23 @@
-# software-engineering-module
+# Software Engineering Module
 ## Lowest Common Ancestor Part 1
-Part 1 is implemented separately in the lowest-common-ancestor-v1 directory (which was modified up to commit d61e782f49f30be7d66b5b7dfbb50009aa445919). Its functionality is shown in the lowest-common-ancestor directory as well, but I kept a separate directory because the implementation changed a lot for directed acyclic graphs. 
+Part 1 is implemented separately in the `lowest-common-ancestor-v1 directory`. The most up-to-date version is on the `master` branch. Its functionality is shown in the `lowest-common-ancestor` directory as well, but I kept a separate directory for v1 because the implementation changed a lot for directed acyclic graphs. 
 
 ## Lowest Common Ancestor Part 2
-Part 2 was implemented on the branch `v2` in the directory lowest-common-ancestor, which was then merged with master in commit de732f78cc717aa68e76e978e61134a6df5a46bf.
+Part 2 was implemented on the branch `v2` in the directory `lowest-common-ancestor`, which was then merged with `master`. The most up-to-date version is on the `master` branch.
 This part allows for you to specify two descendants to find the LCA of because directed acyclic graphs can have multiple LCAs at a time and allowing for more descendants gets very complicated very quickly. 
 
 ### Requirements for Lowest Common Ancestor
 - Java 8
 - JUnit 5
 - Maven
+- Docker (optional)
 
 ### Running Tests for Lowest Common Ancestor
-To run tests in the lowest-common-ancestor-v1 directory or in the lowest-common-ancestor directory type: `mvn test` 
+To run tests in the `lowest-common-ancestor-v1` directory or in the `lowest-common-ancestor` directory type: `mvn test` 
 
 Type `mvn clean` before `mvn test` if you have previously run another maven project and are running into issues with `mvn test`.
 
-To run the tests using Docker in the lowest-common-ancestor-v1 directory or in the lowest-common-ancestor directory type:
+To run the tests using Docker in the `lowest-common-ancestor-v1` directory or in the `lowest-common-ancestor` directory type:
 - `sudo docker build . --tag lca`
 - `sudo docker run lca`
 
