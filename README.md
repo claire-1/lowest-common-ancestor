@@ -33,7 +33,7 @@ Maven Dockerfile: https://hub.docker.com/_/maven
 My biography of Radia Perlman is in `SWEBiographyOfRadiaPerlman.pdf` on the master branch. I have included my sources in the footnotes of the paper. 
 
 ## Report on Measuring Software Engineering Productivity
-My report on measuring software engineering productivity is in `MeasuringSoftwareEngineeringReportByClaireAdams.pdf` on the master branck. I have included my sources in the footnotes and the bibliography of the paper.
+My report on measuring software engineering productivity is in `MeasuringSoftwareEngineeringReportByClaireAdams.pdf` on the master branch. I have included my sources in the footnotes and the bibliography of the paper.
 
 ## Github Metrics Code
 The code to get metrics from Github and use data visualization to display them can be found here: https://github.com/claire-1/github-metrics.git
